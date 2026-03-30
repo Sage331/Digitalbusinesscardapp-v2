@@ -1,0 +1,41 @@
+{
+  "landing": {
+    "title": "Digital Business Card",
+    "signIn": "Sign in",
+
+    "subtitle": "Connect Me",
+    "description": "Share your details quickly and securely.",
+    "cta": "Get started",
+    "features": {
+      "qr": {
+        "title": "QR Code Sharing",
+        "description": "Let people scan and save your contact details instantly."
+      },
+      "remember": {
+        "title": "Remembered Details",
+        "description": "Your profile stays ready to share anytime."
+      },
+      "privacy": {
+        "title": "Privacy Controls",
+        "description": "Choose what you share and when."
+      },
+      "linkedin": {
+        "title": "LinkedIn Friendly",
+        "description": "Make it easy to connect on LinkedIn."
+      }
+    }
+    },
+  "auth": {
+    "backToLanding": "Back",
+    "signInTitle": "Sign In",
+    "signInSubtitle": "Access your account",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember Me",
+    "forgotPassword": "Forgot Password?",
+    "signIn": "Sign In",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up"
+  }
+}
+

@@ -1,0 +1,35 @@
+{
+  "name": "connectme-digital-business-card",
+  "version": "1.0.0",
+  "description": "Privacy-first digital business card with QR code sharing, LinkedIn integration, and contact management",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.0.1",
+    "@capacitor/cli": "^8.0.1",
+    "@capacitor/core": "^8.0.1",
+    "@capacitor/ios": "^8.0.1",
+    "@types/qrcode": "^1.5.6",
+    "firebase": "^12.7.0",
+    "i18next": "^25.7.4",
+    "jsqr": "^1.4.0",
+    "lucide-react": "^0.468.0",
+    "qrcode": "^1.5.4",
+    "qrcode.react": "^4.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^16.5.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.3",
+    "vite": "^5.4.18"
+  }
+}

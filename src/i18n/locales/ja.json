@@ -1,0 +1,225 @@
+{
+  "landing": {
+    "title": "ConnectMe",
+    "subtitle": "プライベートなデジタル名刺",
+    "description": "QRコードで連絡先情報を即座に共有。どこで誰に会ったかを記録。プライベートメモを保存。すべてのつながりを一箇所に。",
+    "features": {
+      "qr": {
+        "title": "QRコード共有",
+        "description": "スキャンするだけで連絡先情報を即座に共有"
+      },
+      "remember": {
+        "title": "つながりを記録",
+        "description": "いつどこで誰に会ったかのメモを追加（共有されません）"
+      },
+      "privacy": {
+        "title": "100%プライベートメモ",
+        "description": "メモはプライベートに保たれ、公開されることはありません"
+      },
+      "notes": {
+        "title": "プライベートメモ",
+        "description": "いつどこで誰に会ったかのメモを追加（共有されません）"
+      },
+      "linkedin": {
+        "title": "LinkedIn連携",
+        "description": "LinkedInプロフィールを自動的に共有"
+      }
+    },
+    "cta": "始める",
+    "signIn": "サインイン"
+  },
+  "auth": {
+    "signIn": "サインイン",
+    "signInTitle": "おかえりなさい",
+    "signInSubtitle": "ConnectMeアカウントにアクセスするにはサインインしてください",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "rememberMe": "ログイン状態を保持",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "noAccount": "アカウントをお持ちでない場合",
+    "signUp": "サインアップ",
+    "backToLanding": "ホームに戻る"
+  },
+  "onboarding": {
+    "steps": {
+      "language": {
+        "title": "言語を選択",
+        "description": "希望する言語を選択してください"
+      },
+      "account": {
+        "title": "アカウント作成",
+        "description": "認証情報を設定"
+      },
+      "personal": {
+        "title": "個人情報",
+        "description": "あなたについて教えてください"
+      },
+      "professional": {
+        "title": "職業情報",
+        "description": "あなたの仕事情報"
+      },
+      "contact": {
+        "title": "連絡先情報",
+        "description": "連絡方法"
+      }
+    },
+    "fields": {
+      "selectLanguage": "言語を選択",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "firstName": "名",
+      "lastName": "姓",
+      "title": "役職",
+      "company": "会社名",
+      "phone": "電話番号",
+      "linkedinUrl": "LinkedInプロフィールURL"
+    },
+    "placeholders": {
+      "email": "your.email@company.com",
+      "password": "安全なパスワードを作成",
+      "firstName": "太郎",
+      "lastName": "山田",
+      "title": "プロダクトデザイナー",
+      "company": "Tech Innovations Inc.",
+      "phone": "+81 90-1234-5678",
+      "linkedinUrl": "https://linkedin.com/in/yourprofile"
+    },
+    "buttons": {
+      "back": "戻る",
+      "next": "次へ",
+      "finish": "完了"
+    },
+    "signOut": "サインアウト"
+  },
+  "home": {
+    "title": "ホーム",
+    "greeting": "こんにちは",
+    "qrTitle": "あなたのQRコード",
+    "qrDescription": "他の人にスキャンしてもらい情報を共有",
+    "buttons": {
+      "shareQR": "QRコードを共有",
+      "scanQR": "QRコードをスキャン",
+      "viewProfile": "プロフィールを表示",
+      "editProfile": "プロフィールを編集"
+    },
+    "stats": {
+      "contacts": "連絡先",
+      "thisWeek": "今週"
+    }
+  },
+  "qr": {
+    "display": {
+      "title": "マイQRコード",
+      "description": "他の人にこのコードをスキャンしてもらい連絡先情報を共有",
+      "shareButton": "QRコードを共有",
+      "downloadButton": "QRコードをダウンロード",
+      "backButton": "戻る"
+    },
+    "scanner": {
+      "title": "QRコードをスキャン",
+      "description": "QRコードにカメラを向けてスキャン",
+      "scanning": "スキャン中...",
+      "error": "カメラにアクセスできません",
+      "invalidQR": "無効なQRコード",
+      "backButton": "戻る"
+    }
+  },
+  "contacts": {
+    "title": "連絡先",
+    "search": "連絡先を検索...",
+    "empty": "まだ連絡先がありません",
+    "emptyDescription": "QRコードをスキャンしてネットワーキングを始めましょう",
+    "dateMet": "会った日",
+    "location": "場所",
+    "backButton": "戻る"
+  },
+  "contactCard": {
+    "title": "連絡先カード",
+    "saveButton": "連絡先に保存",
+    "cancelButton": "キャンセル",
+    "saveSuccess": "連絡先を保存しました！",
+    "saveInfo": "連絡先は次の情報と共に保存されます：",
+    "saveDetails": {
+      "dateMet": "会った日：",
+      "linkedin": "連絡先詳細にLinkedInプロフィールURL",
+      "notes": "あなたのプライベートメモ（あなただけに表示）"
+    }
+  },
+  "contactDetail": {
+    "title": "連絡先詳細",
+    "tabs": {
+      "info": "情報",
+      "notes": "メモ",
+      "history": "履歴"
+    },
+    "info": {
+      "phone": "電話",
+      "email": "メール",
+      "linkedin": "LinkedIn",
+      "company": "会社",
+      "title": "役職"
+    },
+    "notes": {
+      "title": "プライベートメモ",
+      "placeholder": "この連絡先についてのプライベートメモを追加...\n\nこれらのメモはプライベートで、あなただけに表示されます。",
+      "saveButton": "メモを保存",
+      "voiceButton": "音声入力",
+      "listening": "聞き取り中...",
+      "tapToStop": "タップして停止",
+      "saveSuccess": "メモを保存しました！"
+    },
+    "history": {
+      "title": "会った履歴",
+      "firstMet": "初めて会った日",
+      "location": "場所"
+    },
+    "buttons": {
+      "call": "電話",
+      "email": "メール",
+      "viewLinkedIn": "LinkedInを表示",
+      "backButton": "戻る"
+    }
+  },
+  "profile": {
+    "edit": {
+      "title": "プロフィールを編集",
+      "photo": {
+        "title": "プロフィール写真",
+        "upload": "写真をアップロード",
+        "change": "写真を変更",
+        "remove": "写真を削除",
+        "description": "デジタル名刺をカスタマイズするためにプロフィール写真を追加"
+      },
+      "fields": {
+        "firstName": "名",
+        "lastName": "姓",
+        "title": "役職",
+        "company": "会社名",
+        "email": "メールアドレス",
+        "phone": "電話",
+        "linkedinUrl": "LinkedInプロフィールURL"
+      },
+      "language": {
+        "title": "言語",
+        "label": "希望する言語"
+      },
+      "buttons": {
+        "save": "変更を保存",
+        "cancel": "キャンセル"
+      },
+      "saveSuccess": "プロフィールを更新しました！"
+    }
+  },
+  "common": {
+    "back": "戻る",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "close": "閉じる",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功",
+    "required": "必須"
+  }
+}

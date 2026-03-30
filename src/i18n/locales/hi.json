@@ -1,0 +1,225 @@
+{
+  "landing": {
+    "title": "ConnectMe",
+    "subtitle": "आपका निजी डिजिटल बिज़नेस कार्ड",
+    "description": "QR कोड के माध्यम से तुरंत अपनी संपर्क जानकारी साझा करें। याद रखें कि आप किससे कहाँ मिले। निजी नोट्स सहेजें। एक ही स्थान पर आपके सभी कनेक्शन।",
+    "features": {
+      "qr": {
+        "title": "QR कोड साझाकरण",
+        "description": "एक स्कैन के साथ तुरंत अपनी संपर्क जानकारी साझा करें"
+      },
+      "remember": {
+        "title": "कनेक्शन याद रखें",
+        "description": "नोट्स जोड़ें कि आप किससे कहाँ और कब मिले (कभी साझा नहीं किया गया)"
+      },
+      "privacy": {
+        "title": "100% निजी नोट्स",
+        "description": "आपके नोट्स निजी रहते हैं और कभी सार्वजनिक रूप से साझा नहीं किए जाते"
+      },
+      "notes": {
+        "title": "निजी नोट्स",
+        "description": "नोट्स जोड़ें कि आप किससे कहाँ और कब मिले (कभी साझा नहीं किया गया)"
+      },
+      "linkedin": {
+        "title": "LinkedIn एकीकरण",
+        "description": "अपनी LinkedIn प्रोफ़ाइल स्वचालित रूप से साझा करें"
+      }
+    },
+    "cta": "शुरू करें",
+    "signIn": "साइन इन करें"
+  },
+  "auth": {
+    "signIn": "साइन इन करें",
+    "signInTitle": "वापसी पर स्वागत है",
+    "signInSubtitle": "अपने ConnectMe खाते तक पहुँचने के लिए साइन इन करें",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "rememberMe": "मुझे याद रखें",
+    "forgotPassword": "पासवर्ड भूल गए?",
+    "noAccount": "खाता नहीं है?",
+    "signUp": "साइन अप करें",
+    "backToLanding": "होम पेज पर वापस जाएं"
+  },
+  "onboarding": {
+    "steps": {
+      "language": {
+        "title": "भाषा चुनें",
+        "description": "अपनी पसंदीदा भाषा चुनें"
+      },
+      "account": {
+        "title": "खाता बनाएं",
+        "description": "अपनी साख सेट करें"
+      },
+      "personal": {
+        "title": "व्यक्तिगत जानकारी",
+        "description": "हमें अपने बारे में बताएं"
+      },
+      "professional": {
+        "title": "पेशेवर विवरण",
+        "description": "आपकी कार्य जानकारी"
+      },
+      "contact": {
+        "title": "संपर्क जानकारी",
+        "description": "आपसे कैसे संपर्क करें"
+      }
+    },
+    "fields": {
+      "selectLanguage": "अपनी भाषा चुनें",
+      "email": "ईमेल",
+      "password": "पासवर्ड",
+      "firstName": "पहला नाम",
+      "lastName": "अंतिम नाम",
+      "title": "नौकरी का शीर्षक",
+      "company": "कंपनी",
+      "phone": "फ़ोन नंबर",
+      "linkedinUrl": "LinkedIn प्रोफ़ाइल URL"
+    },
+    "placeholders": {
+      "email": "your.email@company.com",
+      "password": "एक सुरक्षित पासवर्ड बनाएं",
+      "firstName": "राज",
+      "lastName": "शर्मा",
+      "title": "उत्पाद डिज़ाइनर",
+      "company": "Tech Innovations Inc.",
+      "phone": "+91 98765 43210",
+      "linkedinUrl": "https://linkedin.com/in/yourprofile"
+    },
+    "buttons": {
+      "back": "वापस",
+      "next": "अगला",
+      "finish": "समाप्त करें"
+    },
+    "signOut": "साइन आउट करें"
+  },
+  "home": {
+    "title": "होम",
+    "greeting": "नमस्ते",
+    "qrTitle": "आपका QR कोड",
+    "qrDescription": "दूसरों को अपनी जानकारी प्राप्त करने के लिए स्कैन करने दें",
+    "buttons": {
+      "shareQR": "QR कोड साझा करें",
+      "scanQR": "QR कोड स्कैन करें",
+      "viewProfile": "मेरी प्रोफ़ाइल देखें",
+      "editProfile": "प्रोफ़ाइल संपादित करें"
+    },
+    "stats": {
+      "contacts": "संपर्क",
+      "thisWeek": "इस सप्ताह"
+    }
+  },
+  "qr": {
+    "display": {
+      "title": "मेरा QR कोड",
+      "description": "दूसरों को अपनी संपर्क जानकारी प्राप्त करने के लिए इस कोड को स्कैन करने दें",
+      "shareButton": "QR कोड साझा करें",
+      "downloadButton": "QR कोड डाउनलोड करें",
+      "backButton": "वापस"
+    },
+    "scanner": {
+      "title": "QR कोड स्कैन करें",
+      "description": "स्कैन करने के लिए अपने कैमरे को QR कोड पर इंगित करें",
+      "scanning": "स्कैन कर रहे हैं...",
+      "error": "कैमरा तक पहुँच नहीं हो सकी",
+      "invalidQR": "अमान्य QR कोड",
+      "backButton": "वापस"
+    }
+  },
+  "contacts": {
+    "title": "संपर्क",
+    "search": "संपर्क खोजें...",
+    "empty": "अभी तक कोई संपर्क नहीं",
+    "emptyDescription": "QR कोड स्कैन करके नेटवर्किंग शुरू करें",
+    "dateMet": "मिले",
+    "location": "में",
+    "backButton": "वापस"
+  },
+  "contactCard": {
+    "title": "संपर्क कार्ड",
+    "saveButton": "संपर्कों में सहेजें",
+    "cancelButton": "रद्द करें",
+    "saveSuccess": "संपर्क सफलतापूर्वक सहेजा गया!",
+    "saveInfo": "संपर्क इसके साथ सहेजा जाएगा:",
+    "saveDetails": {
+      "dateMet": "मिलने की तारीख:",
+      "linkedin": "संपर्क विवरण में LinkedIn प्रोफ़ाइल URL",
+      "notes": "आपके निजी नोट्स (केवल आपके लिए दृश्यमान)"
+    }
+  },
+  "contactDetail": {
+    "title": "संपर्क विवरण",
+    "tabs": {
+      "info": "जानकारी",
+      "notes": "नोट्स",
+      "history": "इतिहास"
+    },
+    "info": {
+      "phone": "फ़ोन",
+      "email": "ईमेल",
+      "linkedin": "LinkedIn",
+      "company": "कंपनी",
+      "title": "शीर्षक"
+    },
+    "notes": {
+      "title": "निजी नोट्स",
+      "placeholder": "इस संपर्क के बारे में निजी नोट्स जोड़ें...\n\nये नोट्स निजी हैं और केवल आपके लिए दृश्यमान हैं।",
+      "saveButton": "नोट्स सहेजें",
+      "voiceButton": "वॉयस इनपुट",
+      "listening": "सुन रहे हैं...",
+      "tapToStop": "रोकने के लिए टैप करें",
+      "saveSuccess": "नोट्स सफलतापूर्वक सहेजे गए!"
+    },
+    "history": {
+      "title": "मीटिंग इतिहास",
+      "firstMet": "पहली मुलाकात",
+      "location": "स्थान"
+    },
+    "buttons": {
+      "call": "कॉल करें",
+      "email": "ईमेल",
+      "viewLinkedIn": "LinkedIn देखें",
+      "backButton": "वापस"
+    }
+  },
+  "profile": {
+    "edit": {
+      "title": "प्रोफ़ाइल संपादित करें",
+      "photo": {
+        "title": "प्रोफ़ाइल फ़ोटो",
+        "upload": "फ़ोटो अपलोड करें",
+        "change": "फ़ोटो बदलें",
+        "remove": "फ़ोटो हटाएं",
+        "description": "अपने डिजिटल बिज़नेस कार्ड को वैयक्तिकृत करने के लिए प्रोफ़ाइल फ़ोटो जोड़ें"
+      },
+      "fields": {
+        "firstName": "पहला नाम",
+        "lastName": "अंतिम नाम",
+        "title": "नौकरी का शीर्षक",
+        "company": "कंपनी",
+        "email": "ईमेल",
+        "phone": "फ़ोन",
+        "linkedinUrl": "LinkedIn प्रोफ़ाइल URL"
+      },
+      "language": {
+        "title": "भाषा",
+        "label": "पसंदीदा भाषा"
+      },
+      "buttons": {
+        "save": "परिवर्तन सहेजें",
+        "cancel": "रद्द करें"
+      },
+      "saveSuccess": "प्रोफ़ाइल सफलतापूर्वक अपडेट की गई!"
+    }
+  },
+  "common": {
+    "back": "वापस",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "delete": "हटाएं",
+    "edit": "संपादित करें",
+    "close": "बंद करें",
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "success": "सफलता",
+    "required": "आवश्यक"
+  }
+}

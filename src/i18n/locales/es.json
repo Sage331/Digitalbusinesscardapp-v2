@@ -1,0 +1,225 @@
+{
+  "landing": {
+    "title": "ConnectMe",
+    "subtitle": "Tu Tarjeta de Presentación Digital Privada",
+    "description": "Comparte tus datos de contacto al instante mediante código QR. Recuerda dónde conociste a alguien. Guarda notas privadas. Todas tus conexiones en un solo lugar.",
+    "features": {
+      "qr": {
+        "title": "Partage par Code QR",
+        "description": "Partagez vos coordonnées instantanément avec un scan"
+      },
+      "remember": {
+        "title": "Recordar Conexiones",
+        "description": "Añade notas sobre dónde y cuándo conociste a alguien (nunca compartidas)"
+      },
+      "privacy": {
+        "title": "Notas 100% Privadas",
+        "description": "Tus notas permanecen privadas y nunca se comparten públicamente"
+      },
+      "notes": {
+        "title": "Notas Privadas",
+        "description": "Añade notas sobre dónde y cuándo conociste a alguien (nunca compartidas)"
+      },
+      "linkedin": {
+        "title": "Integración con LinkedIn",
+        "description": "Comparte tu perfil de LinkedIn automáticamente"
+      }
+    },
+    "cta": "Comenzar",
+    "signIn": "Iniciar Sesión"
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signInTitle": "Bienvenido de Nuevo",
+    "signInSubtitle": "Inicia sesión para acceder a tu cuenta de ConnectMe",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "rememberMe": "Recordarme",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes una cuenta?",
+    "signUp": "Regístrate",
+    "backToLanding": "Volver al inicio"
+  },
+  "onboarding": {
+    "steps": {
+      "language": {
+        "title": "Seleccionar Idioma",
+        "description": "Elige tu idioma preferido"
+      },
+      "account": {
+        "title": "Crear Cuenta",
+        "description": "Configura tus credenciales"
+      },
+      "personal": {
+        "title": "Información Personal",
+        "description": "Cuéntanos sobre ti"
+      },
+      "professional": {
+        "title": "Detalles Profesionales",
+        "description": "Tu información laboral"
+      },
+      "contact": {
+        "title": "Información de Contacto",
+        "description": "Cómo contactarte"
+      }
+    },
+    "fields": {
+      "selectLanguage": "Selecciona tu idioma",
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "title": "Título del Trabajo",
+      "company": "Empresa",
+      "phone": "Número de Teléfono",
+      "linkedinUrl": "URL de Perfil de LinkedIn"
+    },
+    "placeholders": {
+      "email": "tu.correo@empresa.com",
+      "password": "Crea una contraseña segura",
+      "firstName": "Alex",
+      "lastName": "Morgan",
+      "title": "Diseñador de Productos",
+      "company": "Tech Innovations Inc.",
+      "phone": "+34 123 456 789",
+      "linkedinUrl": "https://linkedin.com/in/tuperfil"
+    },
+    "buttons": {
+      "back": "Atrás",
+      "next": "Siguiente",
+      "finish": "Finalizar"
+    },
+    "signOut": "Cerrar Sesión"
+  },
+  "home": {
+    "title": "Inicio",
+    "greeting": "Hola",
+    "qrTitle": "Tu Código QR",
+    "qrDescription": "Permite que otros escaneen para obtener tus datos",
+    "buttons": {
+      "shareQR": "Compartir Código QR",
+      "scanQR": "Escanear Código QR",
+      "viewProfile": "Ver Mi Perfil",
+      "editProfile": "Editar Perfil"
+    },
+    "stats": {
+      "contacts": "Contactos",
+      "thisWeek": "Esta Semana"
+    }
+  },
+  "qr": {
+    "display": {
+      "title": "Mi Código QR",
+      "description": "Permite que otros escaneen este código para obtener tus datos de contacto",
+      "shareButton": "Compartir Código QR",
+      "downloadButton": "Descargar Código QR",
+      "backButton": "Atrás"
+    },
+    "scanner": {
+      "title": "Escanear Código QR",
+      "description": "Apunta tu cámara a un código QR para escanear",
+      "scanning": "Escaneando...",
+      "error": "No se puede acceder a la cámara",
+      "invalidQR": "Código QR inválido",
+      "backButton": "Atrás"
+    }
+  },
+  "contacts": {
+    "title": "Contactos",
+    "search": "Buscar contactos...",
+    "empty": "Aún no hay contactos",
+    "emptyDescription": "Comienza a hacer networking escaneando códigos QR",
+    "dateMet": "Conocido el",
+    "location": "en",
+    "backButton": "Atrás"
+  },
+  "contactCard": {
+    "title": "Tarjeta de Contacto",
+    "saveButton": "Guardar en Contactos",
+    "cancelButton": "Cancelar",
+    "saveSuccess": "¡Contacto guardado exitosamente!",
+    "saveInfo": "El contacto se guardará con:",
+    "saveDetails": {
+      "dateMet": "Fecha de encuentro:",
+      "linkedin": "URL de perfil de LinkedIn en detalles del contacto",
+      "notes": "Tus notas privadas (visibles solo para ti)"
+    }
+  },
+  "contactDetail": {
+    "title": "Detalles del Contacto",
+    "tabs": {
+      "info": "Info",
+      "notes": "Notas",
+      "history": "Historial"
+    },
+    "info": {
+      "phone": "Teléfono",
+      "email": "Correo",
+      "linkedin": "LinkedIn",
+      "company": "Empresa",
+      "title": "Título"
+    },
+    "notes": {
+      "title": "Notas Privadas",
+      "placeholder": "Añade notas privadas sobre este contacto...\n\nEstas notas son privadas y solo visibles para ti.",
+      "saveButton": "Guardar Notas",
+      "voiceButton": "Entrada de Voz",
+      "listening": "Escuchando...",
+      "tapToStop": "Toca para detener",
+      "saveSuccess": "¡Notas guardadas exitosamente!"
+    },
+    "history": {
+      "title": "Historial de Reuniones",
+      "firstMet": "Primera Reunión",
+      "location": "Ubicación"
+    },
+    "buttons": {
+      "call": "Llamar",
+      "email": "Correo",
+      "viewLinkedIn": "Ver LinkedIn",
+      "backButton": "Atrás"
+    }
+  },
+  "profile": {
+    "edit": {
+      "title": "Editar Perfil",
+      "photo": {
+        "title": "Foto de Perfil",
+        "upload": "Subir Foto",
+        "change": "Cambiar Foto",
+        "remove": "Eliminar Foto",
+        "description": "Añade una foto de perfil para personalizar tu tarjeta de presentación digital"
+      },
+      "fields": {
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "title": "Título del Trabajo",
+        "company": "Empresa",
+        "email": "Correo Electrónico",
+        "phone": "Teléfono",
+        "linkedinUrl": "URL de Perfil de LinkedIn"
+      },
+      "language": {
+        "title": "Idioma",
+        "label": "Idioma Preferido"
+      },
+      "buttons": {
+        "save": "Guardar Cambios",
+        "cancel": "Cancelar"
+      },
+      "saveSuccess": "¡Perfil actualizado exitosamente!"
+    }
+  },
+  "common": {
+    "back": "Atrás",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "required": "Requerido"
+  }
+}

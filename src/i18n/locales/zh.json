@@ -1,0 +1,225 @@
+{
+  "landing": {
+    "title": "ConnectMe",
+    "subtitle": "您的私密数字名片",
+    "description": "通过二维码即时分享您的联系信息。记住您在哪里认识某人。保存私人笔记。您的所有联系人集中在一个地方。",
+    "features": {
+      "qr": {
+        "title": "二维码分享",
+        "description": "通过扫描即时分享您的联系信息"
+      },
+      "remember": {
+        "title": "记住联系",
+        "description": "添加关于您在何时何地认识某人的笔记（永不分享）"
+      },
+      "privacy": {
+        "title": "100% 私密笔记",
+        "description": "您的笔记保持私密，永不公开分享"
+      },
+      "notes": {
+        "title": "私人笔记",
+        "description": "添加关于您在何时何地认识某人的笔记（永不分享）"
+      },
+      "linkedin": {
+        "title": "领英集成",
+        "description": "自动分享您的领英个人资料"
+      }
+    },
+    "cta": "开始使用",
+    "signIn": "登录"
+  },
+  "auth": {
+    "signIn": "登录",
+    "signInTitle": "欢迎回来",
+    "signInSubtitle": "登录以访问您的 ConnectMe 账户",
+    "email": "电子邮箱",
+    "password": "密码",
+    "rememberMe": "记住我",
+    "forgotPassword": "忘记密码？",
+    "noAccount": "没有账户？",
+    "signUp": "注册",
+    "backToLanding": "返回首页"
+  },
+  "onboarding": {
+    "steps": {
+      "language": {
+        "title": "选择语言",
+        "description": "选择您的首选语言"
+      },
+      "account": {
+        "title": "创建账户",
+        "description": "设置您的凭证"
+      },
+      "personal": {
+        "title": "个人信息",
+        "description": "告诉我们关于您的信息"
+      },
+      "professional": {
+        "title": "专业详情",
+        "description": "您的工作信息"
+      },
+      "contact": {
+        "title": "联系信息",
+        "description": "如何联系您"
+      }
+    },
+    "fields": {
+      "selectLanguage": "选择您的语言",
+      "email": "电子邮箱",
+      "password": "密码",
+      "firstName": "名字",
+      "lastName": "姓氏",
+      "title": "职位名称",
+      "company": "公司",
+      "phone": "电话号码",
+      "linkedinUrl": "领英个人资料链接"
+    },
+    "placeholders": {
+      "email": "your.email@company.com",
+      "password": "创建一个安全的密码",
+      "firstName": "李",
+      "lastName": "明",
+      "title": "产品设计师",
+      "company": "科技创新有限公司",
+      "phone": "+86 138 0013 8000",
+      "linkedinUrl": "https://linkedin.com/in/yourprofile"
+    },
+    "buttons": {
+      "back": "返回",
+      "next": "下一步",
+      "finish": "完成"
+    },
+    "signOut": "登出"
+  },
+  "home": {
+    "title": "首页",
+    "greeting": "你好",
+    "qrTitle": "您的二维码",
+    "qrDescription": "让其他人扫描以获取您的详细信息",
+    "buttons": {
+      "shareQR": "分享二维码",
+      "scanQR": "扫描二维码",
+      "viewProfile": "查看我的资料",
+      "editProfile": "编辑资料"
+    },
+    "stats": {
+      "contacts": "联系人",
+      "thisWeek": "本周"
+    }
+  },
+  "qr": {
+    "display": {
+      "title": "我的二维码",
+      "description": "让其他人扫描此代码以获取您的联系信息",
+      "shareButton": "分享二维码",
+      "downloadButton": "下载二维码",
+      "backButton": "返回"
+    },
+    "scanner": {
+      "title": "扫描二维码",
+      "description": "将相机对准二维码进行扫描",
+      "scanning": "扫描中...",
+      "error": "无法访问相机",
+      "invalidQR": "无效的二维码",
+      "backButton": "返回"
+    }
+  },
+  "contacts": {
+    "title": "联系人",
+    "search": "搜索联系人...",
+    "empty": "暂无联系人",
+    "emptyDescription": "通过扫描二维码开始建立联系",
+    "dateMet": "认识于",
+    "location": "在",
+    "backButton": "返回"
+  },
+  "contactCard": {
+    "title": "联系人卡片",
+    "saveButton": "保存到联系人",
+    "cancelButton": "取消",
+    "saveSuccess": "联系人保存成功！",
+    "saveInfo": "联系人将保存为：",
+    "saveDetails": {
+      "dateMet": "认识日期：",
+      "linkedin": "领英个人资料链接在联系人详情中",
+      "notes": "您的私人笔记（仅您可见）"
+    }
+  },
+  "contactDetail": {
+    "title": "联系人详情",
+    "tabs": {
+      "info": "信息",
+      "notes": "笔记",
+      "history": "历史"
+    },
+    "info": {
+      "phone": "电话",
+      "email": "邮箱",
+      "linkedin": "领英",
+      "company": "公司",
+      "title": "职位"
+    },
+    "notes": {
+      "title": "私人笔记",
+      "placeholder": "添加关于此联系人的私人笔记...\n\n这些笔记是私密的，仅您可见。",
+      "saveButton": "保存笔记",
+      "voiceButton": "语音输入",
+      "listening": "正在听...",
+      "tapToStop": "点击停止",
+      "saveSuccess": "笔记保存成功！"
+    },
+    "history": {
+      "title": "会面历史",
+      "firstMet": "首次会面",
+      "location": "地点"
+    },
+    "buttons": {
+      "call": "拨打",
+      "email": "邮件",
+      "viewLinkedIn": "查看领英",
+      "backButton": "返回"
+    }
+  },
+  "profile": {
+    "edit": {
+      "title": "编辑资料",
+      "photo": {
+        "title": "头像",
+        "upload": "上传照片",
+        "change": "更改照片",
+        "remove": "移除照片",
+        "description": "添加头像以个性化您的数字名片"
+      },
+      "fields": {
+        "firstName": "名字",
+        "lastName": "姓氏",
+        "title": "职位名称",
+        "company": "公司",
+        "email": "电子邮箱",
+        "phone": "电话",
+        "linkedinUrl": "领英个人资料链接"
+      },
+      "language": {
+        "title": "语言",
+        "label": "首选语言"
+      },
+      "buttons": {
+        "save": "保存更改",
+        "cancel": "取消"
+      },
+      "saveSuccess": "资料更新成功！"
+    }
+  },
+  "common": {
+    "back": "返回",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "close": "关闭",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "required": "必填"
+  }
+}
