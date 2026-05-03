@@ -1,67 +1,82 @@
 {
   "landing": {
-    "title": "ConnectMe",
-    "subtitle": "プライベートなデジタル名刺",
-    "description": "QRコードで連絡先情報を即座に共有。どこで誰に会ったかを記録。プライベートメモを保存。すべてのつながりを一箇所に。",
+    "title": "Connect",
+    "titleSuffix": "Me",
+    "signIn": "サインイン",
+    "subtitle": "究極のデジタル名刺",
+    "description": "QRコードで連絡先を瞬時に共有。出会った場所を記録し、プライベートなメモを残せます。すべてのつながりを1つの場所に。",
+    "cta": "はじめる",
     "features": {
       "qr": {
-        "title": "QRコード共有",
-        "description": "スキャンするだけで連絡先情報を即座に共有"
+        "title": "瞬時にシェア",
+        "description": "QRコードであなたの情報を数秒で共有します。"
       },
       "remember": {
         "title": "つながりを記録",
-        "description": "いつどこで誰に会ったかのメモを追加（共有されません）"
+        "description": "いつ、どこで出会ったかのメモを追加（非公開）"
       },
       "privacy": {
-        "title": "100%プライベートメモ",
+        "title": "100%プライベートなメモ",
         "description": "メモはプライベートに保たれ、公開されることはありません"
-      },
-      "notes": {
-        "title": "プライベートメモ",
-        "description": "いつどこで誰に会ったかのメモを追加（共有されません）"
       },
       "linkedin": {
         "title": "LinkedIn連携",
-        "description": "LinkedInプロフィールを自動的に共有"
+        "description": "LinkedInプロフィールを自動的に共有します"
       }
-    },
-    "cta": "始める",
-    "signIn": "サインイン"
+    }
+  },
+  "location": {
+    "detecting": "検出中...",
+    "hidden": "位置情報非表示",
+    "digital": "デジタルで受信",
+    "defaultCity": "不明な都市",
+    "errors": {
+      "notSupported": "GPS非対応",
+      "permissionDenied": "権限が拒否されました",
+      "timeout": "タイムアウト",
+      "generic": "位置情報エラー"
+    }
+  },
+  "handshake": {
+    "incoming_message": "新しいつながりのリクエスト"
   },
   "auth": {
-    "signIn": "サインイン",
-    "signInTitle": "おかえりなさい",
-    "signInSubtitle": "ConnectMeアカウントにアクセスするにはサインインしてください",
+    "establishing_connection": "クラウドと同期中...",
+    "backToLanding": "ホームに戻る",
+    "signInTitle": "お帰りなさい",
+    "signInSubtitle": "サインインしてConnectMeアカウントにアクセス",
     "email": "メールアドレス",
     "password": "パスワード",
-    "rememberMe": "ログイン状態を保持",
+    "rememberMe": "ログイン状態を保持する",
     "forgotPassword": "パスワードをお忘れですか？",
-    "noAccount": "アカウントをお持ちでない場合",
-    "signUp": "サインアップ",
-    "backToLanding": "ホームに戻る"
+    "signIn": "サインイン",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "signUp": "登録",
+    "signOut": "サインアウト",
+    "resetSent": "リセットリンクの送信先:",
+    "errors": {
+      "emailRequiredForReset": "リセットリンクを送信するため、まずメールアドレスを入力してください。",
+      "resetFailed": "リセットメールを送信できませんでした。メールアドレスが正しいか確認してください。"
+    },
+    "noInternet": "インターネット接続を確認して、もう一度やり直してください。",
+    "resetSentTitle": "メールを確認してください",
+    "resetSentDesc": "パスワード再設定の手順を以下に送信しました：",
+    "forgotPasswordTitle": "パスワードを再設定",
+    "forgotPasswordSubtitle": "メールアドレスを入力して手順を受け取る",
+    "backToLogin": "ログインに戻る",
+    "sendReset": "再設定リンクを送信",
+    "resetMailSent": "再設定メールを送信しました！"
   },
   "onboarding": {
-    "steps": {
-      "language": {
-        "title": "言語を選択",
-        "description": "希望する言語を選択してください"
-      },
-      "account": {
-        "title": "アカウント作成",
-        "description": "認証情報を設定"
-      },
-      "personal": {
-        "title": "個人情報",
-        "description": "あなたについて教えてください"
-      },
-      "professional": {
-        "title": "職業情報",
-        "description": "あなたの仕事情報"
-      },
-      "contact": {
-        "title": "連絡先情報",
-        "description": "連絡方法"
-      }
+    "signOut": "ホーム",
+    "privacyNote": "ConnectMeがお客様の情報を販売したり、一般に公開したりすることはありません。これらの詳細は、後からプロフィール設定でいつでも変更できます。",
+    "buttons": {
+      "next": "次へ",
+      "back": "戻る",
+      "previous": "前へ",
+      "finish": "完了",
+      "complete": "セットアップを完了",
+      "continue": "続ける"
     },
     "fields": {
       "selectLanguage": "言語を選択",
@@ -72,34 +87,82 @@
       "title": "役職",
       "company": "会社名",
       "phone": "電話番号",
-      "linkedinUrl": "LinkedInプロフィールURL"
+      "linkedinUrl": "LinkedInプロフィールURL",
+      "primaryLink": "メインリンク"
     },
     "placeholders": {
-      "email": "your.email@company.com",
-      "password": "安全なパスワードを作成",
-      "firstName": "太郎",
-      "lastName": "山田",
-      "title": "プロダクトデザイナー",
-      "company": "Tech Innovations Inc.",
-      "phone": "+81 90-1234-5678",
-      "linkedinUrl": "https://linkedin.com/in/yourprofile"
+      "email": "your.email@example.com",
+      "password": "最小8文字",
+      "firstName": "例：太郎",
+      "lastName": "例：山田",
+      "title": "例：ソフトウェアエンジニア",
+      "company": "例：テックソリューションズ",
+      "phone": "例：090-1234-5678",
+      "linkedinUrl": "例：linkedin.com/in/username",
+      "url": "https://..."
     },
-    "buttons": {
-      "back": "戻る",
-      "next": "次へ",
-      "finish": "完了"
+    "notifications": {
+      "welcome": "ConnectMeへようこそ！"
     },
-    "signOut": "サインアウト"
+    "steps": {
+      "language": {
+        "title": "ConnectMeへようこそ",
+        "description": "希望の言語を選択してください。"
+      },
+      "account": {
+        "title": "アカウントの作成",
+        "description": "安全なログイン情報を設定してください。"
+      },
+      "personal": {
+        "title": "はじめまして！",
+        "description": "カードに表示する名前を入力してください。"
+      },
+      "professional": {
+        "title": "お仕事について",
+        "description": "役職と会社名を追加してください。"
+      },
+      "contact": {
+        "title": "あともう少しです！",
+        "description": "連絡先を入力してください。"
+      }
+    }
+  },
+  "errors": {
+    "auth": {
+      "emailInUse": "このメールアドレスは既に登録されています。代わりにログインをお試しください。",
+      "invalidEmail": "有効なメールアドレスではありません。",
+      "weakPassword": "パスワードが弱すぎます。8文字以上で入力してください。",
+      "networkError": "ネットワークエラーです。インターネット接続を確認してください。",
+      "tooManyRequests": "試行回数が多すぎます。後でもう一度お試しください。",
+      "generic": "予期せぬエラーが発生しました。もう一度お試しください。",
+      "invalidCredential": "メールアドレスまたはパスワードが無効です。もう一度お試しください。",
+      "userDisabled": "このアカウントは管理者によって無効化されています。",
+      "userNotFound": "このメールアドレスの登録は見つかりませんでした。",
+      "wrongPassword": "パスワードが間違っています。もう一度お試しください。",
+      "emailRequired": "最初にメールアドレスを入力してください。",
+      "reauthenticate": "削除する前に本人確認を行うため、一度ログアウトして再ログインしてください。"
+    },
+    "validation": {
+      "emailInvalid": "無効なメールアドレス",
+      "passwordWeak": "セキュリティ要件：8文字以上",
+      "nameShort": "名が短すぎます",
+      "lastNameRequired": "姓は必須です",
+      "phoneInvalid": "電話番号の形式が無効です",
+      "linkedinInvalid": "無効なLinkedInリンク"
+    },
+    "contact": {
+      "invalidId": "連絡先を保存するには有効なプロフィールIDが必要です。"
+    }
   },
   "home": {
     "title": "ホーム",
     "greeting": "こんにちは",
     "qrTitle": "あなたのQRコード",
-    "qrDescription": "他の人にスキャンしてもらい情報を共有",
+    "qrDescription": "スキャンしてもらい連絡先を共有しましょう",
     "buttons": {
       "shareQR": "QRコードを共有",
       "scanQR": "QRコードをスキャン",
-      "viewProfile": "プロフィールを表示",
+      "viewProfile": "プロフィールを見る",
       "editProfile": "プロフィールを編集"
     },
     "stats": {
@@ -108,44 +171,68 @@
     }
   },
   "qr": {
+    "share": {
+      "title": "私のデジタル名刺",
+      "text": "ConnectMeで{{name}}さんとつながりましょう"
+    },
     "display": {
-      "title": "マイQRコード",
-      "description": "他の人にこのコードをスキャンしてもらい連絡先情報を共有",
+      "title": "私のQRコード",
+      "description": "このコードをスキャンして連絡先を受け取ってください",
       "shareButton": "QRコードを共有",
       "downloadButton": "QRコードをダウンロード",
-      "backButton": "戻る"
+      "backButton": "戻る",
+      "generating": "生成中",
+      "poweredBy": "Powered by ConnectMe Universal"
     },
     "scanner": {
       "title": "QRコードをスキャン",
-      "description": "QRコードにカメラを向けてスキャン",
+      "description": "カメラをQRコードに向けてスキャンします",
       "scanning": "スキャン中...",
       "error": "カメラにアクセスできません",
+      "invalidVCard": "無効または空のvCard",
+      "notBusinessCard": "これは名刺のQRコードではありません。",
+      "new": "新規",
       "invalidQR": "無効なQRコード",
-      "backButton": "戻る"
+      "backButton": "戻る",
+      "contact": "連絡先",
+      "captured": "✅ スキャン完了！",
+      "align": "フレーム内にQRコードを合わせてください",
+      "noReachMethod": "不完全なデータ：電話番号またはメールが見つかりません",
+      "invalid": "無効なQRコード形式です"
     }
   },
   "contacts": {
+    "addSuccess": "連絡先が正常に追加されました！",
     "title": "連絡先",
     "search": "連絡先を検索...",
-    "empty": "まだ連絡先がありません",
-    "emptyDescription": "QRコードをスキャンしてネットワーキングを始めましょう",
-    "dateMet": "会った日",
-    "location": "場所",
-    "backButton": "戻る"
+    "empty": "連絡先はまだありません",
+    "emptyDescription": "QRコードをスキャンしてつながりを増やしましょう",
+    "dateMet": "出会った日：",
+    "location": "場所：",
+    "backButton": "戻る",
+    "alreadyInContacts": "すでに連絡先リストに存在します",
+    "deleteSuccess": "連絡先を正常に削除しました",
+    "deleteConfirmTitle": "連絡先の削除",
+    "deleteConfirmMessage": "本当にこの連絡先を削除しますか？この操作は元に戻せません。"
   },
   "contactCard": {
-    "title": "連絡先カード",
-    "saveButton": "連絡先に保存",
+    "title": "コンタクトカード",
+    "saveButton": "連絡先を保存",
     "cancelButton": "キャンセル",
     "saveSuccess": "連絡先を保存しました！",
-    "saveInfo": "連絡先は次の情報と共に保存されます：",
+    "saveInfo": "連絡先は以下の情報と共に保存されます：",
     "saveDetails": {
-      "dateMet": "会った日：",
-      "linkedin": "連絡先詳細にLinkedInプロフィールURL",
-      "notes": "あなたのプライベートメモ（あなただけに表示）"
-    }
+      "dateMet": "出会った日：",
+      "linkedin": "連絡先詳細のLinkedInプロフィール",
+      "notes": "あなたのプライベートメモ（あなたにのみ表示）"
+    },
+    "requestTitle": "つながりのリクエスト",
+    "locationLabel": "出会った場所",
+    "alreadySaved": "保存済み",
+    "saveToPhone": "スマホに保存"
   },
   "contactDetail": {
+    "vcardNote": "ConnectMe経由で{{date}}に出会いました",
     "title": "連絡先詳細",
     "tabs": {
       "info": "情報",
@@ -157,38 +244,64 @@
       "email": "メール",
       "linkedin": "LinkedIn",
       "company": "会社",
-      "title": "役職"
+      "title": "役職",
+      "addToDevice": "端末に追加",
+      "exportVCard": "vCardを出力",
+      "headline": "ヘッドライン",
+      "socialWeb": "ソーシャル＆ウェブ",
+      "additionalInfo": "追加情報",
+      "scannedMessage": "スキャンしたメッセージ"
     },
     "notes": {
       "title": "プライベートメモ",
-      "placeholder": "この連絡先についてのプライベートメモを追加...\n\nこれらのメモはプライベートで、あなただけに表示されます。",
+      "placeholder": "この連絡先についての非公開メモを追加...\n\nこれらのメモはプライベートであり、あなたにのみ表示されます。",
       "saveButton": "メモを保存",
       "voiceButton": "音声入力",
-      "listening": "聞き取り中...",
+      "listening": "認識中...",
+      "voiceTriggered": "音声入力が開始されました",
       "tapToStop": "タップして停止",
-      "saveSuccess": "メモを保存しました！"
+      "saveSuccess": "メモを正常に保存しました！"
     },
     "history": {
-      "title": "会った履歴",
-      "firstMet": "初めて会った日",
+      "title": "出会った履歴",
+      "firstMet": "初めて出会った日",
       "location": "場所"
     },
     "buttons": {
-      "call": "電話",
-      "email": "メール",
+      "call": "電話をかける",
+      "email": "メールを送信",
       "viewLinkedIn": "LinkedInを表示",
-      "backButton": "戻る"
+      "backButton": "戻る",
+      "delete": "連絡先を削除"
     }
   },
   "profile": {
     "edit": {
-      "title": "プロフィールを編集",
+      "title": "プロフィール編集",
       "photo": {
         "title": "プロフィール写真",
         "upload": "写真をアップロード",
         "change": "写真を変更",
         "remove": "写真を削除",
-        "description": "デジタル名刺をカスタマイズするためにプロフィール写真を追加"
+        "description": "プロフィール写真を追加して、デジタル名刺をカスタマイズしましょう"
+      },
+      "emails": {
+        "title": "連絡先メールアドレス",
+        "selectType": "メールの種類を選択"
+      },
+      "links": {
+        "title": "ソーシャル＆ウェブリンク",
+        "selectPlatform": "プラットフォームを選択"
+      },
+      "types": {
+        "work": "仕事",
+        "personal": "個人",
+        "other": "その他"
+      },
+      "platforms": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "other": "その他"
       },
       "fields": {
         "firstName": "名",
@@ -196,12 +309,14 @@
         "title": "役職",
         "company": "会社名",
         "email": "メールアドレス",
-        "phone": "電話",
+        "phone": "電話番号",
+        "bio": "自己紹介",
+        "bioPlaceholder": "あなたの仕事について簡単に説明してください...",
         "linkedinUrl": "LinkedInプロフィールURL"
       },
       "language": {
-        "title": "言語",
-        "label": "希望する言語"
+        "title": "言語を選択",
+        "label": "言語"
       },
       "buttons": {
         "save": "変更を保存",
@@ -213,13 +328,77 @@
   "common": {
     "back": "戻る",
     "save": "保存",
+    "saved": "保存しました",
     "cancel": "キャンセル",
+    "skip": "スキップ",
+    "continue": "続ける",
+    "optional": "任意",
+    "optionalShort": "任意",
     "delete": "削除",
     "edit": "編集",
     "close": "閉じる",
     "loading": "読み込み中...",
     "error": "エラー",
     "success": "成功",
-    "required": "必須"
+    "required": "必須",
+    "share": "共有",
+    "verify": "確認",
+    "add": "メールを追加",
+    "addLink": "リンクを追加",
+    "today": "今日",
+    "exported": "連絡先にエクスポートしました",
+    "phone": "電話番号",
+    "email": "メール",
+    "dateNotAvailable": "日付を利用できません",
+    "confirm": "確認",
+    "logout": "ログアウト",
+    "next": "次へ",
+    "previous": "前へ",
+    "gotIt": "了解",
+    "ok": "ठीक है"
+  },
+  "quickShare": {
+    "scan": "コードをスキャン",
+    "myQr": "マイQR",
+    "contacts": "連絡先",
+    "edit": "プロフィールを編集"
+  },
+  "settings": {
+    "title": "設定",
+    "security": "セキュリティ",
+    "currentPassword": "現在のパスワード",
+    "newPassword": "新しいパスワード",
+    "confirmPassword": "新しいパスワードを確認",
+    "updatePassword": "パスワードを更新",
+    "fillAllFields": "すべてのパスワードフィールドを入力してください",
+    "passwordTooShort": "新しいパスワードは6文字以上である必要があります",
+    "passwordMismatch": "新しいパスワードが一致しません",
+    "passwordUpdated": "パスワードが正常に変更されました！",
+    "accountActions": "アカウント",
+    "deleteAccount": "アカウントを削除",
+    "deleteTitle": "アカウントを削除",
+    "deleteConfirm": "本当によろしいですか？この操作は元に戻せません。",
+    "deleteSuccess": "アカウントが完全に削除されました",
+    "deletePartial": "データが消去されました。次回ログイン時にメールが削除されます。",
+    "verifyTitle": "パスワードの確認",
+    "verifyDesc": "削除を承認するためにパスワードを入力してください："
+  },
+  "guide": {
+    "edit": {
+      "title": "プロフィールを編集",
+      "desc": "ここをタップして写真やSNSリンクを追加します。"
+    },
+    "share": {
+      "title": "QRコードを共有",
+      "desc": "相手にこれを見せて連絡先を保存してもらいましょう。"
+    },
+    "scan": {
+      "title": "スキャンして繋がる",
+      "desc": "名刺や他のConnectMeユーザーをスキャンするために使用します。"
+    },
+    "contacts": {
+      "title": "連絡先一覧",
+      "desc": "保存したすべての連絡先がここに表示されます。"
+    }
   }
 }

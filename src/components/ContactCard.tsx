@@ -1,162 +1,246 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { 
+  View, 
+  Text, 
+  TouchableOpacity, 
+  StyleSheet, 
+  ScrollView, 
+  Linking,
+  Alert,
+  Image,
+  ActivityIndicator
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { X, Check, MapPin, Calendar, Linkedin } from 'lucide-react';
-import { Contact } from '../types';
+import { 
+  X, Mail, UserPlus, Phone,
+  CheckCircle, MapPin, Download 
+} from 'lucide-react-native'; 
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Contact, SUPPORTED_SOCIALS } from '../types';
+import * as Contacts from 'expo-contacts';
+import { useTheme } from '../contexts/ThemeContext'; // ✅ Global Theme Sync
 
 interface ContactCardProps {
-  contact: Partial<Contact>;
-  onSave: (contact: Partial<Contact>) => void;
+  isVisible: boolean;
+  contact: Contact | null;
+  contacts: Contact[];
+  onSave: (contact: Contact) => void;
   onCancel: () => void;
 }
 
-export function ContactCard({ contact, onSave, onCancel }: ContactCardProps) {
+export function ContactCard({ isVisible, contact, contacts, onSave, onCancel }: ContactCardProps) {
   const { t } = useTranslation();
+  const [isSaving, setIsSaving] = useState(false);
 
-  const initials = `${contact.firstName?.[0] || ''}${contact.lastName?.[0] || ''}`.toUpperCase();
+  // ✅ Hooked into Central Theme
+  const { theme, isDark } = useTheme();
+  
+  if (!isVisible || !contact || !contact.profile) return null;
+  
+  const profile = contact.profile;
+  const isAlreadySaved = contacts.some((c: Contact) => c.id === contact.id);
+  const initials = `${profile.firstName?.[0] || ''}${profile.lastName?.[0] || ''}`.toUpperCase();
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString(undefined, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+  const handleSaveToNativeContacts = async () => {
+    try {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert(t('common.error'), 'Permission to access contacts was denied');
+        return;
+      }
+
+      const nativeContact: any = {
+        [Contacts.Fields.FirstName]: profile.firstName,
+        [Contacts.Fields.LastName]: profile.lastName,
+        [Contacts.Fields.JobTitle]: profile.title || '',
+        [Contacts.Fields.Company]: profile.company || '',
+        [Contacts.Fields.PhoneNumbers]: profile.phones?.length 
+          ? profile.phones.map((n: string) => ({ number: n, label: 'mobile' }))
+          : (profile.phone ? [{ number: profile.phone, label: 'mobile' }] : []),
+        [Contacts.Fields.Emails]: profile.emails?.length
+          ? profile.emails.map((e: any) => ({ email: e.address || e, label: 'work' }))
+          : (profile.email ? [{ email: profile.email, label: 'work' }] : []),
+        [Contacts.Fields.UrlAddresses]: profile.website ? [{ url: profile.website, label: 'other' }] : [],
+        [Contacts.Fields.Note]: `Met via ConnectMe on ${new Date().toLocaleDateString()}.`,
+      };
+
+      if (profile.address) {
+        nativeContact[Contacts.Fields.Addresses] = [{ street: profile.address, label: 'work' }];
+      }
+
+      const contactId = await Contacts.addContactAsync(nativeContact);
+      if (contactId) {
+        Alert.alert(t('common.success'), 'Saved directly to your phone contacts!');
+      }
+    } catch (error) {
+      console.error("Native save failed", error);
+      Alert.alert(t('common.error'), 'Failed to save contact');
+    }
+  };
+
+  const getSocialIcon = (platform: string) => {
+    const p = platform.toLowerCase();
+    const config = SUPPORTED_SOCIALS[p] || SUPPORTED_SOCIALS['other'];
+
+    return (
+      <View style={[styles.socialIconBox, { backgroundColor: config.color + '15' }]}>
+        <FontAwesome5 name={config.icon} size={16} color={config.color} />
+      </View>
+    );
+  };
+
+  const handleSavePress = async () => {
+    if (isSaving || isAlreadySaved) return; 
+    
+    setIsSaving(true);
+    try {
+      await onSave(contact!); 
+    } catch (error) {
+      Alert.alert("Error", "Could not save connection.");
+      setIsSaving(false); 
+    }
+  };
+
+  const handleOpenURL = async (url: string) => {
+    let supportedUrl = url.trim();
+    if (!/^https?:\/\//i.test(supportedUrl)) {
+      supportedUrl = `https://${supportedUrl}`;
+    }
+    try {
+      await Linking.openURL(supportedUrl);
+    } catch (e) {
+      Alert.alert("Error", "Could not open link");
+    }
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-6 z-50">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
-        {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-br from-blue-50 via-blue-100 to-amber-50 p-6 border-b border-gray-200">
-          <div className="flex justify-between items-start mb-4">
-            <h2 className="text-blue-600">{t('contactCard.title')}</h2>
-            <button
-              onClick={onCancel}
-              className="text-gray-500 hover:text-gray-700 transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
-          </div>
-        </div>
+    <View style={styles.absoluteOverlay}>
+      <View style={[styles.card, { backgroundColor: theme.cardBg }]}>
+        <View style={[styles.header, { backgroundColor: theme.cardBg, borderBottomColor: theme.border }]}>
+          <Text style={[styles.headerText, { color: theme.primary }]}>{t('contactCard.title')}</Text>
+          <TouchableOpacity onPress={onCancel} style={styles.closeButton}>
+            <X size={20} color={theme.textSub} />
+          </TouchableOpacity>
+        </View>
 
-        {/* Profile Section */}
-        <div className="p-6">
-          <div className="flex items-center gap-4 mb-6">
-            {contact.photo ? (
-              <img
-                src={contact.photo}
-                alt={`${contact.firstName} ${contact.lastName}`}
-                className="w-20 h-20 rounded-full object-cover"
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollInner}>
+          <View style={styles.profileSection}>
+            {profile.profileImage ? (
+              <Image 
+                source={{ uri: profile.profileImage }} 
+                style={[styles.profileAvatar, { borderColor: theme.primary, backgroundColor: theme.bg }]} 
               />
             ) : (
-              <div className="w-20 h-20 rounded-full bg-blue-600 text-white flex items-center justify-center text-2xl">
-                {initials}
-              </div>
-            )}
-            <div className="flex-1">
-              <h3 className="text-gray-900 mb-1">
-                {contact.firstName} {contact.lastName}
-              </h3>
-              <p className="text-gray-600 mb-1">{contact.title}</p>
-              <p className="text-gray-600">{contact.company}</p>
-            </div>
-          </div>
-
-          {/* Contact Details */}
-          <div className="space-y-4 mb-6">
-            <div className="flex items-start gap-3">
-              <Calendar className="w-5 h-5 text-blue-600 mt-0.5" />
-              <div>
-                <div className="text-gray-700 mb-1">{t('contactCard.saveDetails.dateMet')}</div>
-                <div className="text-gray-900">{contact.dateMet && formatDate(contact.dateMet)}</div>
-              </div>
-            </div>
-
-            {contact.location && (
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-blue-600 mt-0.5" />
-                <div>
-                  <div className="text-gray-700 mb-1">Location:</div>
-                  <div className="text-gray-900">{contact.location.address}</div>
-                </div>
-              </div>
+              <View style={[styles.initialsAvatar, { backgroundColor: theme.primary }]}>
+                <Text style={styles.initialsText}>{initials}</Text>
+              </View>
             )}
 
-            {contact.email && (
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 text-blue-600 mt-0.5">📧</div>
-                <div>
-                  <div className="text-gray-700 mb-1">Email:</div>
-                  <div className="text-gray-900">{contact.email}</div>
-                </div>
-              </div>
+            <Text style={[styles.nameText, { color: theme.textMain }]}>{profile.firstName} {profile.lastName}</Text>
+            {profile.title && <Text style={[styles.titleText, { color: theme.primary }]}>{profile.title}</Text>}
+            {profile.company && <Text style={[styles.companyText, { color: theme.textSub }]}>{profile.company}</Text>}
+          </View>
+
+          <View style={styles.detailsGroup}>
+            {(profile.phones?.length ? profile.phones : (profile.phone ? [profile.phone] : [])).map((num: string, idx: number) => (
+              <View key={`tel-${idx}`} style={[styles.detailRow, { backgroundColor: isDark ? '#0f172a' : '#f8fafc', borderColor: theme.border }, idx > 0 && { marginTop: 8 }]}>
+                <Phone size={18} color={theme.primary} />
+                <Text style={[styles.detailValue, { color: theme.textMain }]}>{num}</Text>
+              </View>
+            ))}
+
+            {(profile.emails?.length ? profile.emails : (profile.email ? [{address: profile.email}] : [])).map((em: any, idx: number) => (
+              <View key={`mail-${idx}`} style={[styles.detailRow, { backgroundColor: isDark ? '#0f172a' : '#f8fafc', borderColor: theme.border, marginTop: 8 }]}>
+                <Mail size={18} color={theme.primary} />
+                <Text style={[styles.detailValue, { color: theme.textMain }]}>{em.address || em}</Text>
+              </View>
+            ))}
+
+            {/* 🛑 Hiding the Location row if it's empty */}
+            {profile.address && profile.address.trim() !== '' && (
+              <View style={[styles.detailRow, { backgroundColor: isDark ? '#0f172a' : '#f8fafc', borderColor: theme.border, marginTop: 8 }]}>
+                <MapPin size={18} color={theme.primary} />
+                <Text style={[styles.detailValue, { color: theme.textMain }]}>{profile.address}</Text>
+              </View>
             )}
+          </View>
 
-            {contact.phone && (
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 text-blue-600 mt-0.5">📱</div>
-                <div>
-                  <div className="text-gray-700 mb-1">Phone:</div>
-                  <div className="text-gray-900">{contact.phone}</div>
-                </div>
-              </div>
+          {profile.links && profile.links.length > 0 && (
+            <View style={styles.socialContainer}>
+              {profile.links.map((link, idx) => {
+                const config = SUPPORTED_SOCIALS[link.platform.toLowerCase()] || SUPPORTED_SOCIALS['other'];
+                return (
+                  <TouchableOpacity key={idx} style={[styles.socialBadge, { backgroundColor: isDark ? '#0f172a' : '#f8fafc', borderColor: theme.border }]} onPress={() => handleOpenURL(link.url)}>
+                    {getSocialIcon(link.platform)}
+                    <Text style={[styles.socialText, { color: config.color }]}>{link.platform}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          )}
+
+          <View style={styles.actionGroup}>
+            <TouchableOpacity onPress={handleSaveToNativeContacts} style={[styles.exportButton, { borderColor: theme.primary }]}>
+              <Download size={18} color={theme.primary} />
+              <Text style={[styles.exportButtonText, { color: theme.primary }]}>{t('contactCard.saveToPhone')}</Text>
+            </TouchableOpacity>
+
+            <View style={styles.buttonRow}>
+              <TouchableOpacity onPress={onCancel} style={[styles.cancelButton, { backgroundColor: isDark ? '#334155' : '#f1f5f9' }]}>
+                <Text style={[styles.cancelButtonText, { color: theme.textMain }]}>{t('common.cancel')}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                disabled={isAlreadySaved || isSaving }
+                onPress={handleSavePress}
+                style={[styles.saveButton, { backgroundColor: theme.primary }, (isAlreadySaved || isSaving) && styles.saveButtonDisabled]}
+              >
+                {isSaving ? (
+                  <ActivityIndicator size="small" color="white" /> 
+                ) : (
+                  <>
+                {isAlreadySaved ? <CheckCircle size={20} color="white" /> : <UserPlus size={20} color="white" />}
+                <Text style={styles.saveButtonText}>
+                  {isAlreadySaved ? t('common.saved') : t('contactCard.saveButton')}
+                </Text>
+              </>
             )}
-
-            {contact.linkedinUrl && (
-              <div className="flex items-start gap-3">
-                <Linkedin className="w-5 h-5 text-blue-600 mt-0.5" />
-                <div>
-                  <div className="text-gray-700 mb-1">LinkedIn:</div>
-                  <a
-                    href={contact.linkedinUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-700"
-                  >
-                    View Profile
-                  </a>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Info Box */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
-            <p className="text-gray-700 mb-3">{t('contactCard.saveInfo')}</p>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                <span>{t('contactCard.saveDetails.dateMet')} {contact.dateMet && formatDate(contact.dateMet)}</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                <span>{t('contactCard.saveDetails.linkedin')}</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                <span>{t('contactCard.saveDetails.notes')}</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex gap-4">
-            <button
-              onClick={onCancel}
-              className="flex-1 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              {t('contactCard.cancelButton')}
-            </button>
-            <button
-              onClick={() => onSave(contact)}
-              className="flex-1 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
-            >
-              <Check className="w-5 h-5" />
-              {t('contactCard.saveButton')}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  absoluteOverlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(15, 23, 42, 0.8)', justifyContent: 'center', alignItems: 'center', padding: 16, zIndex: 99999, elevation: 99999 },
+  card: { borderRadius: 32, width: '100%', maxWidth: 400, minHeight: 550, maxHeight: '90%', overflow: 'hidden', elevation: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.2, shadowRadius: 20 },
+  header: { padding: 20, flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1 },
+  headerText: { fontSize: 12, fontWeight: 'bold', textTransform: 'uppercase' },
+  closeButton: { padding: 4 },
+  scrollInner: { paddingHorizontal: 24, paddingBottom: 40, paddingTop: 10 },
+  profileAvatar: { width: 80, height: 80, borderRadius: 40, marginBottom: 12, borderWidth: 2 },
+  profileSection: { alignItems: 'center', marginBottom: 24 },
+  initialsAvatar: { width: 80, height: 80, borderRadius: 40, justifyContent: 'center', alignItems: 'center', marginBottom: 12 },
+  initialsText: { color: 'white', fontSize: 28, fontWeight: 'bold' },
+  nameText: { fontSize: 24, fontWeight: 'bold', textAlign: 'center' },
+  titleText: { fontSize: 13, fontWeight: 'bold', marginTop: 4, textTransform: 'uppercase' },
+  companyText: { fontSize: 14, marginTop: 2, fontWeight: '600' },
+  detailsGroup: { marginBottom: 20 },
+  detailRow: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 14, borderRadius: 16, borderWidth: 1 },
+  detailValue: { fontSize: 14, fontWeight: '500', flex: 1 },
+  socialContainer: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 24 },
+  socialIconBox: { width: 32, height: 32, borderRadius: 8, justifyContent: 'center', alignItems: 'center', marginRight: 4 },
+  socialBadge: { flexDirection: 'row', alignItems: 'center', paddingRight: 12, paddingLeft: 4, paddingVertical: 4, borderRadius: 12, borderWidth: 1 },
+  socialText: { fontSize: 12, fontWeight: 'bold', textTransform: 'capitalize' },
+  actionGroup: { gap: 12 },
+  exportButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, padding: 16, borderRadius: 16, borderWidth: 2, marginBottom: 4 },
+  exportButtonText: { fontWeight: 'bold' },
+  buttonRow: { flexDirection: 'row', gap: 12 },
+  cancelButton: { flex: 1, padding: 16, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
+  cancelButtonText: { fontWeight: 'bold' },
+  saveButton: { flex: 2, padding: 16, borderRadius: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
+  saveButtonDisabled: { backgroundColor: '#cbd5e1' },
+  saveButtonText: { color: 'white', fontWeight: 'bold' },
+});

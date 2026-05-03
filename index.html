@@ -6,9 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="ConnectMe - Your Private Digital Business Card. Share contact details instantly via QR code and remember where you met someone." />
     <title>ConnectMe - Digital Business Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+      /* This styles the page before React loads */
+      body { margin: 0; padding: 0; }
+      .initial-load-wrapper {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to bottom, #eef4ff, #fdf8e6);
+      }
+      .qr-placeholder {
+        background: white;
+        padding: 24px;
+        border-radius: 32px;
+        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: .7; transform: scale(0.95); }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="initial-load-wrapper">
+        <div class="qr-placeholder">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16h.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
+        </div>
+        <h1 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-top: 24px;">
+          <span style="color: #2563eb;">Connect</span><span style="color: #eab308;">Me</span>
+        </h1>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

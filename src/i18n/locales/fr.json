@@ -1,210 +1,325 @@
 {
   "landing": {
-    "title": "ConnectMe",
-    "subtitle": "Votre Carte de Visite Numérique Privée",
+    "title": "Connect",
+    "titleSuffix": "Me",
+    "signIn": "Se connecter",
+    "subtitle": "La carte de visite numérique ultime",
     "description": "Partagez vos coordonnées instantanément via un code QR. Souvenez-vous où vous avez rencontré quelqu'un. Gardez des notes privées. Toutes vos connexions en un seul endroit.",
+    "cta": "Commencer",
     "features": {
       "qr": {
-        "title": "Partage par Code QR",
-        "description": "Partagez vos coordonnées instantanément avec un scan"
+        "title": "Partage instantané",
+        "description": "Partagez vos coordonnées en quelques secondes via un code QR."
       },
       "remember": {
-        "title": "Se Souvenir des Connexions",
+        "title": "Mémorisez vos connexions",
         "description": "Ajoutez des notes sur où et quand vous avez rencontré quelqu'un (jamais partagées)"
       },
       "privacy": {
-        "title": "Notes 100% Privées",
+        "title": "Notes 100 % privées",
         "description": "Vos notes restent privées et ne sont jamais partagées publiquement"
-      },
-      "notes": {
-        "title": "Notes Privées",
-        "description": "Ajoutez des notes sur où et quand vous avez rencontré quelqu'un (jamais partagées)"
       },
       "linkedin": {
         "title": "Intégration LinkedIn",
         "description": "Partagez votre profil LinkedIn automatiquement"
       }
-    },
-    "cta": "Commencer",
-    "signIn": "Se Connecter"
+    }
+  },
+  "location": {
+    "detecting": "Détection en cours...",
+    "hidden": "Localisation masquée",
+    "digital": "Reçu numériquement",
+    "defaultCity": "Ville inconnue",
+    "errors": {
+      "notSupported": "GPS non pris en charge",
+      "permissionDenied": "Permission refusée",
+      "timeout": "Délai d'attente dépassé",
+      "generic": "Erreur de localisation"
+    }
+  },
+  "handshake": {
+    "incoming_message": "Demande de connexion entrante"
   },
   "auth": {
-    "signIn": "Se Connecter",
-    "signInTitle": "Bienvenue",
+    "establishing_connection": "Synchronisation avec le cloud...",
+    "backToLanding": "Retour à l'accueil",
+    "signInTitle": "Bon retour",
     "signInSubtitle": "Connectez-vous pour accéder à votre compte ConnectMe",
-    "email": "Adresse Email",
-    "password": "Mot de Passe",
+    "email": "E-mail",
+    "password": "Mot de passe",
     "rememberMe": "Se souvenir de moi",
     "forgotPassword": "Mot de passe oublié ?",
+    "signIn": "Se connecter",
     "noAccount": "Vous n'avez pas de compte ?",
     "signUp": "S'inscrire",
-    "backToLanding": "Retour à l'accueil"
+    "signOut": "Se déconnecter",
+    "resetSent": "Lien de réinitialisation envoyé à",
+    "errors": {
+      "emailRequiredForReset": "Veuillez d'abord saisir votre adresse e-mail pour que nous puissions vous envoyer un lien de réinitialisation.",
+      "resetFailed": "Impossible d'envoyer l'e-mail de réinitialisation. Veuillez vérifier si l'adresse est correcte."
+    },
+    "noInternet": "Veuillez vérifier votre connexion internet et réessayer.",
+    "resetSentTitle": "Vérifiez vos e-mails",
+    "resetSentDesc": "Les instructions pour réinitialiser votre mot de passe ont été envoyées à :",
+    "forgotPasswordTitle": "Réinitialiser le mot de passe",
+    "forgotPasswordSubtitle": "Entrez votre e-mail pour recevoir les instructions",
+    "backToLogin": "Retour à la connexion",
+    "sendReset": "Envoyer le lien de réinitialisation",
+    "resetMailSent": "E-mail de réinitialisation envoyé !"
   },
   "onboarding": {
-    "steps": {
-      "language": {
-        "title": "Sélectionner la Langue",
-        "description": "Choisissez votre langue préférée"
-      },
-      "account": {
-        "title": "Créer un Compte",
-        "description": "Configurez vos identifiants"
-      },
-      "personal": {
-        "title": "Informations Personnelles",
-        "description": "Parlez-nous de vous"
-      },
-      "professional": {
-        "title": "Détails Professionnels",
-        "description": "Vos informations professionnelles"
-      },
-      "contact": {
-        "title": "Coordonnées",
-        "description": "Comment vous contacter"
-      }
+    "signOut": "Accueil",
+    "privacyNote": "ConnectMe ne vendra jamais vos informations ni ne les partagera publiquement. Vous pourrez toujours modifier ces détails plus tard dans les paramètres de votre profil.",
+    "buttons": {
+      "next": "Suivant",
+      "back": "Retour",
+      "previous": "Précédent",
+      "finish": "Terminer",
+      "complete": "Terminer la configuration",
+      "continue": "Continuer"
     },
     "fields": {
       "selectLanguage": "Sélectionnez votre langue",
-      "email": "Adresse Email",
-      "password": "Mot de Passe",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
       "firstName": "Prénom",
-      "lastName": "Nom",
-      "title": "Titre du Poste",
+      "lastName": "Nom de famille",
+      "title": "Titre professionnel",
       "company": "Entreprise",
-      "phone": "Numéro de Téléphone",
-      "linkedinUrl": "URL du Profil LinkedIn"
+      "phone": "Numéro de téléphone",
+      "linkedinUrl": "URL du profil LinkedIn",
+      "primaryLink": "Lien principal"
     },
     "placeholders": {
-      "email": "votre.email@entreprise.com",
-      "password": "Créez un mot de passe sécurisé",
-      "firstName": "Alex",
-      "lastName": "Morgan",
-      "title": "Designer de Produit",
-      "company": "Tech Innovations Inc.",
-      "phone": "+33 1 23 45 67 89",
-      "linkedinUrl": "https://linkedin.com/in/votreprofil"
+      "email": "votre.email@exemple.com",
+      "password": "Min. 8 caractères",
+      "firstName": "ex. Marc",
+      "lastName": "ex. Dupont",
+      "title": "ex. Ingénieur logiciel",
+      "company": "ex. Tech Solutions",
+      "phone": "ex. +33 6 12 34 56 78",
+      "linkedinUrl": "ex. linkedin.com/in/nomutilisateur",
+      "url": "https://..."
     },
-    "buttons": {
-      "back": "Retour",
-      "next": "Suivant",
-      "finish": "Terminer"
+    "notifications": {
+      "welcome": "Bienvenue sur ConnectMe !"
     },
-    "signOut": "Se Déconnecter"
+    "steps": {
+      "language": {
+        "title": "Bienvenue sur ConnectMe",
+        "description": "Veuillez sélectionner votre langue préférée."
+      },
+      "account": {
+        "title": "Créez votre compte",
+        "description": "Configurez vos informations de connexion sécurisées."
+      },
+      "personal": {
+        "title": "Ravi de vous rencontrer !",
+        "description": "Quel nom doit apparaître sur votre carte ?"
+      },
+      "professional": {
+        "title": "Que faites-vous ?",
+        "description": "Ajoutez votre titre professionnel et votre entreprise."
+      },
+      "contact": {
+        "title": "Presque terminé !",
+        "description": "Comment les gens peuvent-ils vous joindre ?"
+      }
+    }
+  },
+  "errors": {
+    "auth": {
+      "emailInUse": "Cet e-mail est déjà enregistré. Essayez de vous connecter à la place.",
+      "invalidEmail": "L'adresse e-mail n'est pas valide.",
+      "weakPassword": "Le mot de passe est trop faible. Veuillez utiliser au moins 8 caractères.",
+      "networkError": "Erreur réseau. Veuillez vérifier votre connexion Internet.",
+      "tooManyRequests": "Trop de tentatives. Veuillez réessayer plus tard.",
+      "generic": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+      "invalidCredential": "E-mail ou mot de passe invalide. Veuillez réessayer.",
+      "userDisabled": "Ce compte a été désactivé par un administrateur.",
+      "userNotFound": "Aucun compte trouvé avec cet e-mail.",
+      "wrongPassword": "Mot de passe incorrect. Veuillez réessayer.",
+      "emailRequired": "Veuillez d'abord saisir votre adresse e-mail.",
+      "reauthenticate": "Veuillez vous déconnecter et vous reconnecter pour vérifier votre identité avant la suppression."
+    },
+    "validation": {
+      "emailInvalid": "Adresse e-mail invalide",
+      "passwordWeak": "Condition de sécurité : 8+ caractères",
+      "nameShort": "Prénom trop court",
+      "lastNameRequired": "Le nom de famille est requis",
+      "phoneInvalid": "Format de téléphone invalide",
+      "linkedinInvalid": "Lien LinkedIn invalide"
+    },
+    "contact": {
+      "invalidId": "Un ID de profil valide est requis pour enregistrer un contact."
+    }
   },
   "home": {
     "title": "Accueil",
     "greeting": "Bonjour",
-    "qrTitle": "Votre Code QR",
+    "qrTitle": "Votre code QR",
     "qrDescription": "Laissez les autres scanner pour obtenir vos coordonnées",
     "buttons": {
-      "shareQR": "Partager le Code QR",
-      "scanQR": "Scanner un Code QR",
-      "viewProfile": "Voir Mon Profil",
-      "editProfile": "Modifier le Profil"
+      "shareQR": "Partager le code QR",
+      "scanQR": "Scanner un code QR",
+      "viewProfile": "Voir mon profil",
+      "editProfile": "Modifier le profil"
     },
     "stats": {
       "contacts": "Contacts",
-      "thisWeek": "Cette Semaine"
+      "thisWeek": "Cette semaine"
     }
   },
   "qr": {
+    "share": {
+      "title": "Ma carte de visite numérique",
+      "text": "Connectez-vous avec {{name}} sur ConnectMe"
+    },
     "display": {
-      "title": "Mon Code QR",
+      "title": "Mon code QR",
       "description": "Laissez les autres scanner ce code pour obtenir vos coordonnées",
-      "shareButton": "Partager le Code QR",
-      "downloadButton": "Télécharger le Code QR",
-      "backButton": "Retour"
+      "shareButton": "Partager le code QR",
+      "downloadButton": "Télécharger le code QR",
+      "backButton": "Retour",
+      "generating": "Génération",
+      "poweredBy": "Propulsé par ConnectMe Universal"
     },
     "scanner": {
-      "title": "Scanner un Code QR",
-      "description": "Pointez votre caméra vers un code QR pour scanner",
-      "scanning": "Scan en cours...",
-      "error": "Impossible d'accéder à la caméra",
+      "title": "Scanner un code QR",
+      "description": "Pointez votre appareil photo vers un code QR pour le scanner",
+      "scanning": "Numérisation...",
+      "error": "Impossible d'accéder à l'appareil photo",
+      "invalidVCard": "vCard invalide ou vide",
+      "notBusinessCard": "Ceci n'est pas un code QR de contact.",
+      "new": "Nouveau",
       "invalidQR": "Code QR invalide",
-      "backButton": "Retour"
+      "backButton": "Retour",
+      "contact": "Contact",
+      "captured": "✅ Capturé !",
+      "align": "Alignez le code QR dans le cadre",
+      "noReachMethod": "Données incomplètes : Aucun téléphone ou e-mail détecté",
+      "invalid": "Format de code QR invalide"
     }
   },
   "contacts": {
+    "addSuccess": "Contact ajouté avec succès !",
     "title": "Contacts",
     "search": "Rechercher des contacts...",
-    "empty": "Pas encore de contacts",
+    "empty": "Aucun contact pour le moment",
     "emptyDescription": "Commencez à réseauter en scannant des codes QR",
-    "dateMet": "Rencontré le",
+    "dateMet": "Rencontré(e) le",
     "location": "à",
-    "backButton": "Retour"
+    "backButton": "Retour",
+    "alreadyInContacts": "Le contact est déjà dans votre liste",
+    "deleteSuccess": "Contact supprimé avec succès",
+    "deleteConfirmTitle": "Supprimer le contact",
+    "deleteConfirmMessage": "Êtes-vous sûr de vouloir supprimer ce contact ? Cette action est irréversible."
   },
   "contactCard": {
-    "title": "Carte de Contact",
-    "saveButton": "Enregistrer dans les Contacts",
+    "title": "Fiche de contact",
+    "saveButton": "Enregistrer le contact",
     "cancelButton": "Annuler",
     "saveSuccess": "Contact enregistré avec succès !",
     "saveInfo": "Le contact sera enregistré avec :",
     "saveDetails": {
       "dateMet": "Date de rencontre :",
-      "linkedin": "URL du profil LinkedIn dans les détails du contact",
+      "linkedin": "Profil LinkedIn dans les détails du contact",
       "notes": "Vos notes privées (visibles uniquement par vous)"
-    }
+    },
+    "requestTitle": "Demande de connexion",
+    "locationLabel": "Lieu de rencontre",
+    "alreadySaved": "Déjà dans les contacts",
+    "saveToPhone": "Enregistrer sur le téléphone"
   },
   "contactDetail": {
-    "title": "Détails du Contact",
+    "vcardNote": "Rencontré(e) via ConnectMe le {{date}}",
+    "title": "Détails du contact",
     "tabs": {
-      "info": "Info",
+      "info": "Infos",
       "notes": "Notes",
       "history": "Historique"
     },
     "info": {
       "phone": "Téléphone",
-      "email": "Email",
+      "email": "E-mail",
       "linkedin": "LinkedIn",
       "company": "Entreprise",
-      "title": "Titre"
+      "title": "Titre",
+      "addToDevice": "Ajouter à l'appareil",
+      "exportVCard": "Exporter vCard",
+      "headline": "Titre",
+      "socialWeb": "Réseaux & Web",
+      "additionalInfo": "Infos supplémentaires",
+      "scannedMessage": "Message scanné"
     },
     "notes": {
-      "title": "Notes Privées",
-      "placeholder": "Ajoutez des notes privées sur ce contact...\n\nCes notes sont privées et visibles uniquement par vous.",
-      "saveButton": "Enregistrer les Notes",
-      "voiceButton": "Saisie Vocale",
+      "title": "Notes privées",
+      "placeholder": "Ajoutez des notes privées sur ce contact...\n\nCes notes sont privées et ne sont visibles que par vous.",
+      "saveButton": "Enregistrer les notes",
+      "voiceButton": "Saisie vocale",
       "listening": "Écoute...",
-      "tapToStop": "Touchez pour arrêter",
+      "voiceTriggered": "Saisie vocale déclenchée",
+      "tapToStop": "Appuyez pour arrêter",
       "saveSuccess": "Notes enregistrées avec succès !"
     },
     "history": {
-      "title": "Historique des Rencontres",
-      "firstMet": "Première Rencontre",
-      "location": "Lieu"
+      "title": "Historique des rencontres",
+      "firstMet": "Première rencontre",
+      "location": "Adresse"
     },
     "buttons": {
       "call": "Appeler",
-      "email": "Email",
+      "email": "Envoyer un e-mail",
       "viewLinkedIn": "Voir LinkedIn",
-      "backButton": "Retour"
+      "backButton": "Retour",
+      "delete": "Supprimer le contact"
     }
   },
   "profile": {
     "edit": {
-      "title": "Modifier le Profil",
+      "title": "Modifier le profil",
       "photo": {
-        "title": "Photo de Profil",
-        "upload": "Télécharger une Photo",
-        "change": "Changer la Photo",
-        "remove": "Supprimer la Photo",
-        "description": "Ajoutez une photo de profil pour personnaliser votre carte de visite numérique"
+        "title": "Photo de profil",
+        "upload": "Importer une photo",
+        "change": "Changer la photo",
+        "remove": "Supprimer la photo",
+        "description": "Ajoutez une photo de profil pour personnaliser votre carte"
+      },
+      "emails": {
+        "title": "E-mails de contact",
+        "selectType": "Sélectionnez le type d'e-mail"
+      },
+      "links": {
+        "title": "Réseaux & Liens Web",
+        "selectPlatform": "Sélectionnez la plateforme"
+      },
+      "types": {
+        "work": "Travail",
+        "personal": "Personnel",
+        "other": "Autre"
+      },
+      "platforms": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "other": "other"
       },
       "fields": {
         "firstName": "Prénom",
-        "lastName": "Nom",
-        "title": "Titre du Poste",
+        "lastName": "Nom de famille",
+        "title": "Titre professionnel",
         "company": "Entreprise",
-        "email": "Email",
+        "email": "Adresse e-mail",
         "phone": "Téléphone",
-        "linkedinUrl": "URL du Profil LinkedIn"
+        "bio": "Bio",
+        "bioPlaceholder": "Décrivez brièvement ce que vous faites...",
+        "linkedinUrl": "URL LinkedIn"
       },
       "language": {
-        "title": "Langue",
-        "label": "Langue Préférée"
+        "title": "Sélectionner la langue",
+        "label": "Langue"
       },
       "buttons": {
-        "save": "Enregistrer les Modifications",
+        "save": "Enregistrer les modifications",
         "cancel": "Annuler"
       },
       "saveSuccess": "Profil mis à jour avec succès !"
@@ -213,13 +328,77 @@
   "common": {
     "back": "Retour",
     "save": "Enregistrer",
+    "saved": "Enregistré",
     "cancel": "Annuler",
+    "skip": "Ignorer",
+    "continue": "Continuer",
+    "optional": "Optionnel",
+    "optionalShort": "Opt.",
     "delete": "Supprimer",
     "edit": "Modifier",
     "close": "Fermer",
     "loading": "Chargement...",
     "error": "Erreur",
     "success": "Succès",
-    "required": "Requis"
+    "required": "Requis",
+    "share": "Partager",
+    "verify": "Vérifier",
+    "add": "Ajouter un e-mail",
+    "addLink": "Ajouter un lien",
+    "today": "Aujourd'hui",
+    "exported": "Exporté vers les contacts",
+    "phone": "Téléphone",
+    "email": "E-mail",
+    "dateNotAvailable": "Date indisponible",
+    "confirm": "Confirmer",
+    "logout": "Se déconnecter",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "gotIt": "J'ai compris",
+    "ok": "OK"
+  },
+  "quickShare": {
+    "scan": "Scanner le code",
+    "myQr": "Mon QR",
+    "contacts": "Contacts",
+    "edit": "Modifier le profil"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "security": "Sécurité",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le nouveau mot de passe",
+    "updatePassword": "Mettre à jour le mot de passe",
+    "fillAllFields": "Veuillez remplir tous les champs du mot de passe",
+    "passwordTooShort": "Le nouveau mot de passe doit comporter au moins 6 caractères",
+    "passwordMismatch": "Les nouveaux mots de passe ne correspondent pas",
+    "passwordUpdated": "Mot de passe changé avec succès !",
+    "accountActions": "Compte",
+    "deleteAccount": "Supprimer le compte",
+    "deleteTitle": "Supprimer le compte",
+    "deleteConfirm": "Êtes-vous sûr ? Cette action est permanente.",
+    "deleteSuccess": "Compte entièrement supprimé",
+    "deletePartial": "Données effacées. L'e-mail sera supprimé lors de la prochaine connexion.",
+    "verifyTitle": "Confirmer le mot de passe",
+    "verifyDesc": "Veuillez entrer votre mot de passe pour autoriser la suppression :"
+  },
+  "guide": {
+    "edit": {
+      "title": "Personnaliser le profil",
+      "desc": "Appuyez ici pour ajouter votre photo et vos liens sociaux."
+    },
+    "share": {
+      "title": "Partager votre QR",
+      "desc": "Montrez ceci aux autres pour qu'ils puissent enregistrer votre contact."
+    },
+    "scan": {
+      "title": "Scanner et Connecter",
+      "desc": "Utilisez ceci pour scanner des cartes de visite et d'autres utilisateurs ConnectMe."
+    },
+    "contacts": {
+      "title": "Contacts",
+      "desc": "Retrouvez toutes vos connexions enregistrées ici."
+    }
   }
 }

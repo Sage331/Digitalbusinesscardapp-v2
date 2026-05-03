@@ -1,41 +1,419 @@
 {
   "landing": {
-    "title": "Digital Business Card",
-    "signIn": "Sign in",
-
-    "subtitle": "Connect Me",
-    "description": "Share your details quickly and securely.",
-    "cta": "Get started",
+    "title": "Connect",
+    "titleSuffix": "Me",
+    "signIn": "Sign In",
+    "subtitle": "The Ultimate Digital Business Card",
+    "description": "Share your contact details instantly via QR code. Remember where you met someone. Keep private notes. All your connections in one place.",
+    "cta": "Get Started",
+    "slides": {
+      "nfc": {
+        "title": "100% Wireless",
+        "description": "ConnectMe uses an NFC chipset, which is an integrated IC that enables short-range, wireless communication between two devices."
+      },
+      "qr": {
+        "title": "QR Code",
+        "description": "Use a two-dimensional barcode, aka QR Code, as an alternative wireless communication method."
+      },
+      "exchange": {
+        "title": "Seamless Exchange",
+        "description": "No matter which mobile phone your contact is using, share your information with them seamlessly."
+      }
+    },
+    
     "features": {
       "qr": {
-        "title": "QR Code Sharing",
-        "description": "Let people scan and save your contact details instantly."
+        "title": "Instant Sharing",
+        "description": "Share your details in seconds via QR code."
       },
       "remember": {
-        "title": "Remembered Details",
-        "description": "Your profile stays ready to share anytime."
+        "title": "Remember Connections",
+        "description": "Add notes about where and when you met someone (never shared)"
       },
       "privacy": {
-        "title": "Privacy Controls",
-        "description": "Choose what you share and when."
+        "title": "100% Private Notes",
+        "description": "Your notes stay private and are never shared publicly"
       },
       "linkedin": {
-        "title": "LinkedIn Friendly",
-        "description": "Make it easy to connect on LinkedIn."
+        "title": "LinkedIn Integration",
+        "description": "Share your LinkedIn profile automatically"
       }
     }
-    },
+  },
+  "location": {
+    "detecting": "Detecting...",
+    "hidden": "Location Hidden",
+    "digital": "Received Digitally",
+    "defaultCity": "Unknown City",
+    "errors": {
+      "notSupported": "GPS Not Supported",
+      "permissionDenied": "Permission Denied",
+      "timeout": "Timeout",
+      "generic": "Location Error"
+    }
+  },
+  "handshake": {
+    "incoming_message": "Incoming Connection Request"
+  },
   "auth": {
-    "backToLanding": "Back",
-    "signInTitle": "Sign In",
-    "signInSubtitle": "Access your account",
+    "establishing_connection": "Syncing with cloud...",
+    "backToLanding": "Back to Home",
+    "signInTitle": "Welcome Back",
+    "signInSubtitle": "Sign in to access your ConnectMe account",
     "email": "Email",
     "password": "Password",
     "rememberMe": "Remember Me",
     "forgotPassword": "Forgot Password?",
     "signIn": "Sign In",
     "noAccount": "Don't have an account?",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "resetSent": "Reset link sent to",
+    "errors": {
+      "emailRequiredForReset": "Please enter your email address first so we can send a reset link.",
+      "resetFailed": "Could not send reset email. Please check if the email is correct."
+    },
+    "noInternet": "Please check your internet connection and try again.",
+    "resetSentTitle": "Check Your Mail",
+    "resetSentDesc": "Instructions to reset your password have been sent to:",
+    "forgotPasswordTitle": "Reset Password",
+    "forgotPasswordSubtitle": "Enter your email to receive reset instructions",
+    "backToLogin": "Back to Login",
+    "sendReset": "Send Reset Link",
+    "resetMailSent": "Password reset email sent!"
+  },
+  "onboarding": {
+    "signOut": "Home",
+    "privacyNote": "ConnectMe will never sell your information or share it publicly. You can always change these details later in your profile settings.",
+    "buttons": {
+      "next": "Next",
+      "back": "Back",
+      "previous": "Previous",
+      "finish": "Finish",
+      "complete": "Complete Setup",
+      "continue": "Continue"
+    },
+    "fields": {
+      "selectLanguage": "Select your language",
+      "email": "Email Address",
+      "password": "Password",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "title": "Job Title",
+      "company": "Company",
+      "phone": "Phone Number",
+      "linkedinUrl": "LinkedIn Profile URL",
+      "primaryLink": "Primary Link"
+    },
+    "placeholders": {
+      "email": "youremail@example.com",
+      "password": "Min. 8 characters",
+      "firstName": "e.g. Mark",
+      "lastName": "e.g. John",
+      "title": "e.g. Software Engineer",
+      "company": "e.g. Tech Solutions",
+      "phone": "e.g. +1 234 567 890",
+      "linkedinUrl": "e.g. linkedin.com/in/username",
+      "url": "https://..."
+    },
+    "notifications": {
+      "welcome": "Welcome to ConnectMe!"
+    },
+    "steps": {
+      "language": {
+        "title": "Welcome to ConnectMe",
+        "description": "Please select your preferred language."
+      },
+      "account": {
+        "title": "Create your account",
+        "description": "Set up your secure login details."
+      },
+      "personal": {
+        "title": "Great to meet you!",
+        "description": "What name should appear on your card?"
+      },
+      "professional": {
+        "title": "What do you do?",
+        "description": "Add your professional title and company."
+      },
+      "contact": {
+        "title": "Almost done!",
+        "description": "How can people reach you?"
+      }
+    }
+  },
+  "errors": {
+    "auth": {
+      "emailInUse": "This email is already registered. Try logging in instead.",
+      "invalidEmail": "The email address is not valid.",
+      "weakPassword": "The password is too weak. Please use at least 8 characters.",
+      "networkError": "Network error. Please check your internet connection.",
+      "tooManyRequests": "Too many attempts. Please try again later.",
+      "generic": "An unexpected error occurred. Please try again.",
+      "invalidCredential": "Invalid email or password. Please try again.",
+      "userDisabled": "This account has been disabled by an administrator.",
+      "userNotFound": "No account found with this email.",
+      "wrongPassword": "Incorrect password. Please try again.",
+      "emailRequired": "Please enter your email address first.",
+      "reauthenticate": "Please log out and back in to verify your identity before deleting."
+    },
+    "validation": {
+      "emailInvalid": "Invalid email address",
+      "passwordWeak": "Security requirement: 8+ characters",
+      "nameShort": "First name too short",
+      "lastNameRequired": "Last name is required",
+      "phoneInvalid": "Invalid phone format",
+      "linkedinInvalid": "Invalid LinkedIn link"
+    },
+    "contact": {
+      "invalidId": "A valid Profile ID is required to save a contact."
+    }
+  },
+  "home": {
+    "title": "Home",
+    "greeting": "Hello",
+    "qrTitle": "Your QR Code",
+    "qrDescription": "Let others scan to get your details",
+    "buttons": {
+      "shareQR": "Share QR Code",
+      "scanQR": "Scan QR Code",
+      "viewProfile": "View My Profile",
+      "editProfile": "Edit Profile"
+    },
+    "stats": {
+      "contacts": "Contacts",
+      "thisWeek": "This Week"
+    }
+  },
+  "qr": {
+    "share": {
+      "title": "My Digital Business Card",
+      "text": "Connect with {{name}} on ConnectMe"
+    },
+    "display": {
+      "title": "My QR Code",
+      "description": "Let others scan this code to get your contact details",
+      "shareButton": "Share QR Code",
+      "downloadButton": "Download QR Code",
+      "backButton": "Back",
+      "generating": "Generating",
+      "poweredBy": "Powered by ConnectMe Universal"
+    },
+    "scanner": {
+      "title": "Scan QR Code",
+      "description": "Point your camera at a QR code to scan",
+      "scanning": "Scanning...",
+      "error": "Cannot access camera",
+      "invalidVCard": "Invalid or Empty vCard",
+      "notBusinessCard": "This isn't a business card QR.",
+      "new": "New",
+      "invalidQR": "Invalid QR Code",
+      "backButton": "Back",
+      "contact": "Contact",
+      "captured": "✅ Captured!",
+      "align": "Align QR Code inside the frame",
+      "noReachMethod": "Incomplete Data: No phone or email detected",
+      "invalid": "Invalid QR Code format"
+    }
+  },
+  "contacts": {
+    "addSuccess": "Contact added successfully!",
+    "title": "Contacts",
+    "search": "Search contacts...",
+    "empty": "No contacts yet",
+    "emptyDescription": "Start networking by scanning QR codes",
+    "dateMet": "Met on",
+    "location": "at",
+    "backButton": "Back",
+    "alreadyInContacts": "Contact already in your list",
+    "deleteSuccess": "Contact deleted successfully",
+    "deleteConfirmTitle": "Delete Contact",
+    "deleteConfirmMessage": "Are you sure you want to remove this contact? This action cannot be undone."
+  },
+  "contactCard": {
+    "title": "Contact Card",
+    "saveButton": "Save Contact",
+    "cancelButton": "Cancel",
+    "saveSuccess": "Contact saved successfully!",
+    "saveInfo": "Contact will be saved with:",
+    "saveDetails": {
+      "dateMet": "Meeting date:",
+      "linkedin": "LinkedIn profile in contact details",
+      "notes": "Your private notes (visible only to you)"
+    },
+    "requestTitle": "Connection Request",
+    "locationLabel": "Meeting Spot",
+    "alreadySaved": "Already in Contacts",
+    "saveToPhone": "Save to Phone"
+  },
+  "contactDetail": {
+    "vcardNote": "Met via ConnectMe on {{date}}",
+    "title": "Contact Details",
+    "tabs": {
+      "info": "Info",
+      "notes": "Notes",
+      "history": "History"
+    },
+    "info": {
+      "phone": "Phone",
+      "email": "Email",
+      "linkedin": "LinkedIn",
+      "company": "Company",
+      "title": "Title",
+      "addToDevice": "Add to Device",
+      "exportVCard": "Export vCard",
+      "headline": "Headline",
+      "socialWeb": "Social & Web",
+      "additionalInfo": "Additional Info",
+      "scannedMessage": "Scanned Message"
+    },
+    "notes": {
+      "title": "Private Notes",
+      "placeholder": "Add private notes about this contact...\n\nThese notes are private and only visible to you.",
+      "saveButton": "Save Notes",
+      "voiceButton": "Voice Input",
+      "listening": "Listening...",
+      "voiceTriggered": "Voice input triggered",
+      "tapToStop": "Tap to stop",
+      "saveSuccess": "Notes saved successfully!"
+    },
+    "history": {
+      "title": "Meeting History",
+      "firstMet": "First Met",
+      "location": "Address"
+    },
+    "buttons": {
+      "call": "Call",
+      "email": "Email",
+      "viewLinkedIn": "View LinkedIn",
+      "backButton": "Back",
+      "delete": "Delete Contact"
+    }
+  },
+  "profile": {
+    "edit": {
+      "title": "Edit Profile",
+      "photo": {
+        "title": "Profile Photo",
+        "upload": "Upload Photo",
+        "change": "Change Photo",
+        "remove": "Remove Photo",
+        "description": "Add a profile photo to personalize your digital business card"
+      },
+      "emails": {
+        "title": "Contact Emails",
+        "selectType": "Select Email Type"
+      },
+      "links": {
+        "title": "Social & Web Links",
+        "selectPlatform": "Select Platform"
+      },
+      "types": {
+        "work": "Work",
+        "personal": "Personal",
+        "other": "Other"
+      },
+      "platforms": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "other": "Other"
+      },
+      "fields": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "title": "Job Title",
+        "company": "Company",
+        "email": "Email Address",
+        "phone": "Phone",
+        "bio": "Bio",
+        "bioPlaceholder": "Briefly describe what you do...",
+        "linkedinUrl": "LinkedIn Profile URL"
+      },
+      "language": {
+        "title": "Select Language",
+        "label": "Language"
+      },
+      "buttons": {
+        "save": "Save Changes",
+        "cancel": "Cancel"
+      },
+      "saveSuccess": "Profile updated successfully!"
+    }
+  },
+  "common": {
+    "back": "Back",
+    "save": "Save",
+    "saved": "Saved",
+    "cancel": "Cancel",
+    "skip": "Skip",
+    "continue": "Continue",
+    "optional": "Optional",
+    "optionalShort": "Opt.",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "required": "Required",
+    "share": "Share",
+    "verify": "Verify",
+    "add": "Add Email",
+    "addLink": "Add Link",
+    "today": "Today",
+    "exported": "Exported to Contacts",
+    "phone": "Phone",
+    "email": "Email",
+    "dateNotAvailable": "Date not available",
+    "confirm": "Confirm",
+    "logout": "Log Out",
+    "next": "Next",
+    "previous": "Previous",
+    "gotIt": "Got it",
+    "ok": "OK"
+  },
+  "quickShare": {
+    "scan": "Scan Code",
+    "myQr": "My QR",
+    "contacts": "Contacts",
+    "edit": "Edit Profile"
+  },
+  "settings": {
+    "title": "Settings",
+    "security": "Security",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "updatePassword": "Update Password",
+    "fillAllFields": "Please fill all password fields",
+    "passwordTooShort": "New password must be at least 6 characters",
+    "passwordMismatch": "New passwords do not match",
+    "passwordUpdated": "Password changed successfully!",
+    "accountActions": "Account",
+    "deleteAccount": "Delete Account",
+    "deleteTitle": "Delete Account",
+    "deleteConfirm": "Are you sure? This action is permanent.",
+    "deleteSuccess": "Account fully deleted",
+    "deletePartial": "Data wiped. Email will clear on next login.",
+    "verifyTitle": "Confirm Password",
+    "verifyDesc": "Please enter your password to authorize deletion:"
+  },
+  "guide": {
+    "edit": {
+      "title": "Customize Profile",
+      "desc": "Tap here to add your photo and social links."
+    },
+    "share": {
+      "title": "Share your QR",
+      "desc": "Show this to others to let them save your contact."
+    },
+    "scan": {
+      "title": "Scan & Connect",
+      "desc": "Use this to scan business cards and other ConnectMe users."
+    },
+    "contacts": {
+      "title": "Contacts",
+      "desc": "Find all your saved connections here."
+    }
   }
 }
-

@@ -1,0 +1,88 @@
+{
+  "expo": {
+    "name": "ConnectMe",
+    "slug": "business-card-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "plugins": [
+      "expo-font",
+      "expo-localization",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow ConnectMe to save your QR code.",
+          "savePhotosPermission": "Allow ConnectMe to save your QR code.",
+          "isSaveToAlbumFlagsRequired": false
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 24
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5289f07f-b95a-4425-b755-e6e37c892411"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_CONTACTS",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_MEDIA_AUDIO",
+        "android.permission.WRITE_MEDIA_AUDIO",
+        "android.permission.WRITE_MEDIA_IMAGES",
+        "android.permission.WRITE_MEDIA_VIDEO",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "package": "com.samueladeitan.businesscardapp",
+      "googleServicesFile": "./google-services.json",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": {
+            "scheme": "https"
+          },
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
+    },
+    "ios": {
+      "bundleIdentifier": "com.samueladeitan.businesscardapp",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "We use your location to show where you met your new contacts.",
+        "NSMicrophoneUsageDescription": "This app uses the microphone to transcribe your meeting notes into text.",
+        "NSSpeechRecognitionUsageDescription": "This app uses speech recognition to turn your voice into notes.",
+        "NSCameraUsageDescription": "Allow ConnectMe to use the camera to scan QR codes.",
+        "NSPhotoLibraryAddUsageDescription": "Allow ConnectMe to save your QR code to your photos.",
+        "NSPhotoLibraryUsageDescription": "Allow ConnectMe to access your photos to set a profile picture."
+      }
+    },
+    "owner": "samueladeitan"
+  }
+}

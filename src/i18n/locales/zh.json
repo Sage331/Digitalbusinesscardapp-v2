@@ -1,106 +1,169 @@
 {
   "landing": {
-    "title": "ConnectMe",
-    "subtitle": "您的私密数字名片",
-    "description": "通过二维码即时分享您的联系信息。记住您在哪里认识某人。保存私人笔记。您的所有联系人集中在一个地方。",
+    "title": "Connect",
+    "titleSuffix": "Me",
+    "signIn": "登录",
+    "subtitle": "终极数字名片",
+    "description": "通过二维码即时分享您的联系方式。记住您在哪里遇到某人。保留私人笔记。所有的联系人都集中在一个地方。",
+    "cta": "开始使用",
     "features": {
       "qr": {
-        "title": "二维码分享",
-        "description": "通过扫描即时分享您的联系信息"
+        "title": "即时分享",
+        "description": "通过二维码在几秒钟内分享您的详细信息。"
       },
       "remember": {
-        "title": "记住联系",
-        "description": "添加关于您在何时何地认识某人的笔记（永不分享）"
+        "title": "记住联系人",
+        "description": "添加关于您在何时何地遇到某人的笔记（绝不共享）"
       },
       "privacy": {
-        "title": "100% 私密笔记",
-        "description": "您的笔记保持私密，永不公开分享"
-      },
-      "notes": {
-        "title": "私人笔记",
-        "description": "添加关于您在何时何地认识某人的笔记（永不分享）"
+        "title": "100% 私人笔记",
+        "description": "您的笔记保持私密，绝不公开分享"
       },
       "linkedin": {
-        "title": "领英集成",
-        "description": "自动分享您的领英个人资料"
+        "title": "LinkedIn 集成",
+        "description": "自动分享您的 LinkedIn 个人资料"
       }
-    },
-    "cta": "开始使用",
-    "signIn": "登录"
+    }
+  },
+  "location": {
+    "detecting": "正在检测...",
+    "hidden": "位置已隐藏",
+    "digital": "数字接收",
+    "defaultCity": "未知城市",
+    "errors": {
+      "notSupported": "不支持 GPS",
+      "permissionDenied": "权限被拒绝",
+      "timeout": "超时",
+      "generic": "位置错误"
+    }
+  },
+  "handshake": {
+    "incoming_message": "收到的连接请求"
   },
   "auth": {
-    "signIn": "登录",
+    "establishing_connection": "正在与云端同步...",
+    "backToLanding": "返回主页",
     "signInTitle": "欢迎回来",
-    "signInSubtitle": "登录以访问您的 ConnectMe 账户",
-    "email": "电子邮箱",
+    "signInSubtitle": "登录以访问您的 ConnectMe 帐户",
+    "email": "电子邮件",
     "password": "密码",
     "rememberMe": "记住我",
     "forgotPassword": "忘记密码？",
-    "noAccount": "没有账户？",
+    "signIn": "登录",
+    "noAccount": "没有帐户？",
     "signUp": "注册",
-    "backToLanding": "返回首页"
+    "signOut": "登出",
+    "resetSent": "重置链接已发送至",
+    "errors": {
+      "emailRequiredForReset": "请先输入您的电子邮件地址，以便我们发送重置链接。",
+      "resetFailed": "无法发送重置电子邮件。请检查电子邮件是否正确。"
+    },
+    "noInternet": "请检查您的网络连接并重试。",
+    "resetSentTitle": "检查您的邮件",
+    "resetSentDesc": "重置密码的说明已发送至：",
+    "forgotPasswordTitle": "重置密码",
+    "forgotPasswordSubtitle": "输入您的电子邮件以接收重置说明",
+    "backToLogin": "返回登录",
+    "sendReset": "发送重置链接",
+    "resetMailSent": "重置邮件已发送！"
   },
   "onboarding": {
-    "steps": {
-      "language": {
-        "title": "选择语言",
-        "description": "选择您的首选语言"
-      },
-      "account": {
-        "title": "创建账户",
-        "description": "设置您的凭证"
-      },
-      "personal": {
-        "title": "个人信息",
-        "description": "告诉我们关于您的信息"
-      },
-      "professional": {
-        "title": "专业详情",
-        "description": "您的工作信息"
-      },
-      "contact": {
-        "title": "联系信息",
-        "description": "如何联系您"
-      }
+    "signOut": "主页",
+    "privacyNote": "ConnectMe 绝不会出售您的信息或公开分享。您随时可以在个人资料设置中更改这些详细信息。",
+    "buttons": {
+      "next": "下一步",
+      "back": "返回",
+      "previous": "上一步",
+      "finish": "完成",
+      "complete": "完成设置",
+      "continue": "继续"
     },
     "fields": {
       "selectLanguage": "选择您的语言",
-      "email": "电子邮箱",
+      "email": "电子邮件地址",
       "password": "密码",
       "firstName": "名字",
       "lastName": "姓氏",
-      "title": "职位名称",
+      "title": "职位",
       "company": "公司",
       "phone": "电话号码",
-      "linkedinUrl": "领英个人资料链接"
+      "linkedinUrl": "LinkedIn 个人资料 URL",
+      "primaryLink": "主要链接"
     },
     "placeholders": {
-      "email": "your.email@company.com",
-      "password": "创建一个安全的密码",
-      "firstName": "李",
-      "lastName": "明",
-      "title": "产品设计师",
-      "company": "科技创新有限公司",
-      "phone": "+86 138 0013 8000",
-      "linkedinUrl": "https://linkedin.com/in/yourprofile"
+      "email": "youremail@example.com",
+      "password": "至少 8 个字符",
+      "firstName": "例如：张",
+      "lastName": "例如：伟",
+      "title": "例如：软件工程师",
+      "company": "例如：科技公司",
+      "phone": "例如：+86 123 4567 8901",
+      "linkedinUrl": "例如：linkedin.com/in/username",
+      "url": "https://..."
     },
-    "buttons": {
-      "back": "返回",
-      "next": "下一步",
-      "finish": "完成"
+    "notifications": {
+      "welcome": "欢迎来到 ConnectMe！"
     },
-    "signOut": "登出"
+    "steps": {
+      "language": {
+        "title": "欢迎来到 ConnectMe",
+        "description": "请选择您的首选语言。"
+      },
+      "account": {
+        "title": "创建您的帐户",
+        "description": "设置您的安全登录详细信息。"
+      },
+      "personal": {
+        "title": "很高兴认识您！",
+        "description": "您的名片上应该显示什么名字？"
+      },
+      "professional": {
+        "title": "您从事什么工作？",
+        "description": "添加您的专业头衔和公司。"
+      },
+      "contact": {
+        "title": "马上就好！",
+        "description": "人们如何联系您？"
+      }
+    }
+  },
+  "errors": {
+    "auth": {
+      "emailInUse": "此电子邮件已注册。请尝试登录。",
+      "invalidEmail": "电子邮件地址无效。",
+      "weakPassword": "密码太弱。请至少使用 8 个字符。",
+      "networkError": "网络错误。请检查您的互联网连接。",
+      "tooManyRequests": "尝试次数过多。请稍后再试。",
+      "generic": "发生意外错误。请重试。",
+      "invalidCredential": "电子邮件或密码无效。请重试。",
+      "userDisabled": "此帐户已被管理员禁用。",
+      "userNotFound": "找不到使用此电子邮件的帐户。",
+      "wrongPassword": "密码错误。请重试。",
+      "emailRequired": "请先输入您的电子邮件地址。",
+      "reauthenticate": "删除前请退出并重新登录以验证您的身份。"
+    },
+    "validation": {
+      "emailInvalid": "无效的电子邮件地址",
+      "passwordWeak": "安全要求：8 个以上字符",
+      "nameShort": "名字太短",
+      "lastNameRequired": "姓氏为必填项",
+      "phoneInvalid": "无效的电话格式",
+      "linkedinInvalid": "无效的 LinkedIn 链接"
+    },
+    "contact": {
+      "invalidId": "保存联系人需要有效的个人资料 ID。"
+    }
   },
   "home": {
-    "title": "首页",
+    "title": "主页",
     "greeting": "你好",
     "qrTitle": "您的二维码",
     "qrDescription": "让其他人扫描以获取您的详细信息",
     "buttons": {
       "shareQR": "分享二维码",
       "scanQR": "扫描二维码",
-      "viewProfile": "查看我的资料",
-      "editProfile": "编辑资料"
+      "viewProfile": "查看我的个人资料",
+      "editProfile": "编辑个人资料"
     },
     "stats": {
       "contacts": "联系人",
@@ -108,44 +171,68 @@
     }
   },
   "qr": {
+    "share": {
+      "title": "我的数字名片",
+      "text": "在 ConnectMe 上与 {{name}} 建立连接"
+    },
     "display": {
       "title": "我的二维码",
-      "description": "让其他人扫描此代码以获取您的联系信息",
+      "description": "让其他人扫描此二维码以获取您的联系方式",
       "shareButton": "分享二维码",
       "downloadButton": "下载二维码",
-      "backButton": "返回"
+      "backButton": "返回",
+      "generating": "正在生成",
+      "poweredBy": "由 ConnectMe Universal 提供支持"
     },
     "scanner": {
       "title": "扫描二维码",
-      "description": "将相机对准二维码进行扫描",
-      "scanning": "扫描中...",
+      "description": "将您的相机对准二维码进行扫描",
+      "scanning": "正在扫描...",
       "error": "无法访问相机",
+      "invalidVCard": "无效或空的 vCard",
+      "notBusinessCard": "这不是名片二维码。",
+      "new": "新建",
       "invalidQR": "无效的二维码",
-      "backButton": "返回"
+      "backButton": "返回",
+      "contact": "联系人",
+      "captured": "✅ 已捕获！",
+      "align": "将二维码对准取景框",
+      "noReachMethod": "数据不完整：未检测到电话或电子邮件",
+      "invalid": "二维码格式无效"
     }
   },
   "contacts": {
+    "addSuccess": "联系人添加成功！",
     "title": "联系人",
     "search": "搜索联系人...",
     "empty": "暂无联系人",
-    "emptyDescription": "通过扫描二维码开始建立联系",
-    "dateMet": "认识于",
-    "location": "在",
-    "backButton": "返回"
+    "emptyDescription": "通过扫描二维码开始建立您的网络",
+    "dateMet": "相识于",
+    "location": "地点",
+    "backButton": "返回",
+    "alreadyInContacts": "联系人已在您的列表中",
+    "deleteSuccess": "联系人已成功删除",
+    "deleteConfirmTitle": "删除联系人",
+    "deleteConfirmMessage": "您确定要删除此联系人吗？此操作无法撤销。"
   },
   "contactCard": {
-    "title": "联系人卡片",
-    "saveButton": "保存到联系人",
+    "title": "联系人名片",
+    "saveButton": "保存联系人",
     "cancelButton": "取消",
     "saveSuccess": "联系人保存成功！",
-    "saveInfo": "联系人将保存为：",
+    "saveInfo": "联系人将随以下信息保存：",
     "saveDetails": {
-      "dateMet": "认识日期：",
-      "linkedin": "领英个人资料链接在联系人详情中",
-      "notes": "您的私人笔记（仅您可见）"
-    }
+      "dateMet": "会面日期：",
+      "linkedin": "联系人详细信息中的 LinkedIn 个人资料",
+      "notes": "您的私人笔记（仅对您可见）"
+    },
+    "requestTitle": "连接请求",
+    "locationLabel": "会面地点",
+    "alreadySaved": "已在联系人中",
+    "saveToPhone": "保存到手机"
   },
   "contactDetail": {
+    "vcardNote": "于 {{date}} 通过 ConnectMe 结识",
     "title": "联系人详情",
     "tabs": {
       "info": "信息",
@@ -154,72 +241,164 @@
     },
     "info": {
       "phone": "电话",
-      "email": "邮箱",
-      "linkedin": "领英",
+      "email": "电子邮件",
+      "linkedin": "LinkedIn",
       "company": "公司",
-      "title": "职位"
+      "title": "职位",
+      "addToDevice": "添加到设备",
+      "exportVCard": "导出 vCard",
+      "headline": "头衔",
+      "socialWeb": "社交与网站",
+      "additionalInfo": "附加信息",
+      "scannedMessage": "扫描信息"
     },
     "notes": {
       "title": "私人笔记",
-      "placeholder": "添加关于此联系人的私人笔记...\n\n这些笔记是私密的，仅您可见。",
+      "placeholder": "添加关于此联系人的私人笔记...\n\n这些笔记是私人的，仅对您可见。",
       "saveButton": "保存笔记",
       "voiceButton": "语音输入",
-      "listening": "正在听...",
+      "listening": "正在聆听...",
+      "voiceTriggered": "语音输入已触发",
       "tapToStop": "点击停止",
       "saveSuccess": "笔记保存成功！"
     },
     "history": {
       "title": "会面历史",
-      "firstMet": "首次会面",
+      "firstMet": "初次会面",
       "location": "地点"
     },
     "buttons": {
-      "call": "拨打",
-      "email": "邮件",
-      "viewLinkedIn": "查看领英",
-      "backButton": "返回"
+      "call": "呼叫",
+      "email": "发邮件",
+      "viewLinkedIn": "查看 LinkedIn",
+      "backButton": "返回",
+      "delete": "删除联系人"
     }
   },
   "profile": {
     "edit": {
-      "title": "编辑资料",
+      "title": "编辑个人资料",
       "photo": {
-        "title": "头像",
+        "title": "个人资料照片",
         "upload": "上传照片",
         "change": "更改照片",
-        "remove": "移除照片",
-        "description": "添加头像以个性化您的数字名片"
+        "remove": "删除照片",
+        "description": "添加个人资料照片以个性化您的数字名片"
+      },
+      "emails": {
+        "title": "联系电子邮件",
+        "selectType": "选择电子邮件类型"
+      },
+      "links": {
+        "title": "社交与网站链接",
+        "selectPlatform": "选择平台"
+      },
+      "types": {
+        "work": "工作",
+        "personal": "个人",
+        "other": "其他"
+      },
+      "platforms": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "other": "其他"
       },
       "fields": {
         "firstName": "名字",
         "lastName": "姓氏",
-        "title": "职位名称",
+        "title": "职位",
         "company": "公司",
-        "email": "电子邮箱",
+        "email": "电子邮件地址",
         "phone": "电话",
-        "linkedinUrl": "领英个人资料链接"
+        "bio": "简介",
+        "bioPlaceholder": "简要描述您的工作...",
+        "linkedinUrl": "LinkedIn 个人资料 URL"
       },
       "language": {
-        "title": "语言",
-        "label": "首选语言"
+        "title": "选择语言",
+        "label": "语言"
       },
       "buttons": {
         "save": "保存更改",
         "cancel": "取消"
       },
-      "saveSuccess": "资料更新成功！"
+      "saveSuccess": "个人资料更新成功！"
     }
   },
   "common": {
     "back": "返回",
     "save": "保存",
+    "saved": "已保存",
     "cancel": "取消",
+    "skip": "跳过",
+    "continue": "继续",
+    "optional": "可选",
+    "optionalShort": "可选",
     "delete": "删除",
     "edit": "编辑",
     "close": "关闭",
     "loading": "加载中...",
     "error": "错误",
     "success": "成功",
-    "required": "必填"
+    "required": "必填",
+    "share": "分享",
+    "verify": "验证",
+    "add": "添加电子邮件",
+    "addLink": "添加链接",
+    "today": "今天",
+    "exported": "已导出至联系人",
+    "phone": "电话",
+    "email": "电子邮件",
+    "dateNotAvailable": "日期不可用",
+    "confirm": "确认",
+    "logout": "登出",
+    "next": "下一步",
+    "previous": "上一步",
+    "gotIt": "知道了",
+    "ok": "确定"
+  },
+  "quickShare": {
+    "scan": "扫描代码",
+    "myQr": "我的二维码",
+    "contacts": "联系人",
+    "edit": "编辑个人资料"
+  },
+  "settings": {
+    "title": "设置",
+    "security": "安全",
+    "currentPassword": "当前密码",
+    "newPassword": "新密码",
+    "confirmPassword": "确认新密码",
+    "updatePassword": "更新密码",
+    "fillAllFields": "请填写所有密码字段",
+    "passwordTooShort": "新密码必须至少为 6 个字符",
+    "passwordMismatch": "新密码不匹配",
+    "passwordUpdated": "密码修改成功！",
+    "accountActions": "账户",
+    "deleteAccount": "删除账户",
+    "deleteTitle": "删除账户",
+    "deleteConfirm": "您确定吗？此操作是永久性的。",
+    "deleteSuccess": "账号已完全删除",
+    "deletePartial": "数据已清除。电子邮件将在下次登录时清除。",
+    "verifyTitle": "确认密码",
+    "verifyDesc": "请输入您的密码以授权删除："
+  },
+  "guide": {
+    "edit": {
+      "title": "自定义个人资料",
+      "desc": "点击此处添加您的照片和社交链接。"
+    },
+    "share": {
+      "title": "分享二维码",
+      "desc": "向他人展示此码以便他们保存您的联系方式。"
+    },
+    "scan": {
+      "title": "扫码连接",
+      "desc": "使用此功能扫描名片或其他 ConnectMe 用户。"
+    },
+    "contacts": {
+      "title": "联系人",
+      "desc": "在此处查找您保存的所有联系人。"
+    }
   }
 }

@@ -1,18 +1,47 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp, getApp, getApps } from "firebase/app";
+import * as FirebaseAuth from "firebase/auth";
 import { getStorage } from "firebase/storage";
+import { 
+  initializeFirestore, 
+  memoryLocalCache // ✅ FIXED: Using memory cache for React Native
+} from "firebase/firestore";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// 1. Your Project Configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBM_2TbgPbGJKqZYvOsYe1LleQuTqFHq8A",
-    authDomain: "digitalbusinesscard-ab6c8.firebaseapp.com",
-    projectId: "digitalbusinesscard-ab6c8",
-    storageBucket: "digitalbusinesscard-ab6c8.firebasestorage.app",
-    messagingSenderId: "75857211562",
-    appId: "1:75857211562:web:0429362ea3350a3b6a60d3"
+  apiKey: "AIzaSyB9AQfHSPwOy_R8SMAZDb_uasbyyQ2wP5U",
+  authDomain: "samuel-e8a4b.firebaseapp.com",
+  projectId: "samuel-e8a4b",
+  storageBucket: "samuel-e8a4b.firebasestorage.app",
+  messagingSenderId: "967986320464",
+  appId: "1:967986320464:web:ddbaf3e2a2ab5c969ead55",
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+// 2. Initialize App safely for Hot-Reloads
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+// 3. Auth: Using your existing Native Persistence logic
+let firebaseAuth;
+try {
+  // @ts-ignore
+  const persistence = FirebaseAuth.getReactNativePersistence(AsyncStorage);
+  firebaseAuth = FirebaseAuth.initializeAuth(app, { persistence });
+} catch (e) {
+  firebaseAuth = FirebaseAuth.getAuth(app);
+}
+
+export const auth = firebaseAuth;
+
+// 4. Firestore: Synced for Stability & Performance on Mobile
+export const db = initializeFirestore(app, {
+  // ✅ STABILITY: Prevents the "RPC Write stream" transport errors
+  experimentalAutoDetectLongPolling: true, 
+  
+  // ✅ FIX: This stops the "Falling back to memory cache" warning.
+  // React Native doesn't have 'IndexedDB', so we use memoryLocalCache.
+  localCache: memoryLocalCache({}) 
+});
+
+// 5. Storage & Exports
 export const storage = getStorage(app);
+export default app;

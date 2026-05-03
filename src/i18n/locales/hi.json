@@ -1,101 +1,164 @@
 {
   "landing": {
-    "title": "ConnectMe",
-    "subtitle": "आपका निजी डिजिटल बिज़नेस कार्ड",
-    "description": "QR कोड के माध्यम से तुरंत अपनी संपर्क जानकारी साझा करें। याद रखें कि आप किससे कहाँ मिले। निजी नोट्स सहेजें। एक ही स्थान पर आपके सभी कनेक्शन।",
+    "title": "Connect",
+    "titleSuffix": "Me",
+    "signIn": "साइन इन करें",
+    "subtitle": "सर्वश्रेष्ठ डिजिटल बिज़नेस कार्ड",
+    "description": "QR कोड के ज़रिए अपने संपर्क विवरण तुरंत साझा करें। याद रखें कि आप किसी से कहाँ मिले थे। निजी नोट्स रखें। आपके सभी कनेक्शन एक ही जगह पर।",
+    "cta": "शुरू करें",
     "features": {
       "qr": {
-        "title": "QR कोड साझाकरण",
-        "description": "एक स्कैन के साथ तुरंत अपनी संपर्क जानकारी साझा करें"
+        "title": "त्वरित साझाकरण",
+        "description": "QR कोड के माध्यम से सेकंडों में अपना विवरण साझा करें।"
       },
       "remember": {
         "title": "कनेक्शन याद रखें",
-        "description": "नोट्स जोड़ें कि आप किससे कहाँ और कब मिले (कभी साझा नहीं किया गया)"
+        "description": "आप किसी से कहां और कब मिले, इसके बारे में नोट्स जोड़ें (कभी साझा नहीं किए जाते)"
       },
       "privacy": {
         "title": "100% निजी नोट्स",
-        "description": "आपके नोट्स निजी रहते हैं और कभी सार्वजनिक रूप से साझा नहीं किए जाते"
-      },
-      "notes": {
-        "title": "निजी नोट्स",
-        "description": "नोट्स जोड़ें कि आप किससे कहाँ और कब मिले (कभी साझा नहीं किया गया)"
+        "description": "आपके नोट्स निजी रहते हैं और कभी भी सार्वजनिक रूप से साझा नहीं किए जाते"
       },
       "linkedin": {
         "title": "LinkedIn एकीकरण",
         "description": "अपनी LinkedIn प्रोफ़ाइल स्वचालित रूप से साझा करें"
       }
-    },
-    "cta": "शुरू करें",
-    "signIn": "साइन इन करें"
+    }
+  },
+  "location": {
+    "detecting": "पता लगाया जा रहा है...",
+    "hidden": "स्थान छिपा हुआ है",
+    "digital": "डिजिटल रूप से प्राप्त",
+    "defaultCity": "अज्ञात शहर",
+    "errors": {
+      "notSupported": "GPS समर्थित नहीं है",
+      "permissionDenied": "अनुमति अस्वीकृत",
+      "timeout": "समय समाप्त",
+      "generic": "स्थान त्रुटि"
+    }
+  },
+  "handshake": {
+    "incoming_message": "आने वाला कनेक्शन अनुरोध"
   },
   "auth": {
-    "signIn": "साइन इन करें",
+    "establishing_connection": "क्लाउड के साथ सिंक हो रहा है...",
+    "backToLanding": "होम पर वापस जाएँ",
     "signInTitle": "वापसी पर स्वागत है",
     "signInSubtitle": "अपने ConnectMe खाते तक पहुँचने के लिए साइन इन करें",
     "email": "ईमेल",
     "password": "पासवर्ड",
     "rememberMe": "मुझे याद रखें",
     "forgotPassword": "पासवर्ड भूल गए?",
-    "noAccount": "खाता नहीं है?",
+    "signIn": "साइन इन करें",
+    "noAccount": "क्या आपके पास खाता नहीं है?",
     "signUp": "साइन अप करें",
-    "backToLanding": "होम पेज पर वापस जाएं"
+    "signOut": "साइन आउट करें",
+    "resetSent": "रीसेट लिंक यहाँ भेजा गया",
+    "errors": {
+      "emailRequiredForReset": "कृपया पहले अपना ईमेल पता दर्ज करें ताकि हम रीसेट लिंक भेज सकें।",
+      "resetFailed": "रीसेट ईमेल नहीं भेजा जा सका। कृपया जांचें कि क्या ईमेल सही है।"
+    },
+    "noInternet": "कृपया अपना इंटरनेट कनेक्शन जांचें और पुन: प्रयास करें।",
+    "resetSentTitle": "अपना ईमेल जांचें",
+    "resetSentDesc": "आपका पासवर्ड रीसेट करने के निर्देश यहां भेजे गए हैं:",
+    "forgotPasswordTitle": "पासवर्ड रीसेट करें",
+    "forgotPasswordSubtitle": "रीसेट निर्देश प्राप्त करने के लिए अपना ईमेल दर्ज करें",
+    "backToLogin": "लॉगिन पर वापस जाएं",
+    "sendReset": "रीसेट लिंक भेजें",
+    "resetMailSent": "पासवर्ड रीसेट ईमेल भेज दिया गया है!"
   },
   "onboarding": {
-    "steps": {
-      "language": {
-        "title": "भाषा चुनें",
-        "description": "अपनी पसंदीदा भाषा चुनें"
-      },
-      "account": {
-        "title": "खाता बनाएं",
-        "description": "अपनी साख सेट करें"
-      },
-      "personal": {
-        "title": "व्यक्तिगत जानकारी",
-        "description": "हमें अपने बारे में बताएं"
-      },
-      "professional": {
-        "title": "पेशेवर विवरण",
-        "description": "आपकी कार्य जानकारी"
-      },
-      "contact": {
-        "title": "संपर्क जानकारी",
-        "description": "आपसे कैसे संपर्क करें"
-      }
+    "signOut": "होम",
+    "privacyNote": "ConnectMe कभी भी आपकी जानकारी नहीं बेचेगा या इसे सार्वजनिक रूप से साझा नहीं करेगा। आप बाद में अपनी प्रोफ़ाइल सेटिंग में इन विवरणों को हमेशा बदल सकते हैं।",
+    "buttons": {
+      "next": "अगला",
+      "back": "पीछे",
+      "previous": "पिछला",
+      "finish": "समाप्त",
+      "complete": "सेटअप पूरा करें",
+      "continue": "जारी रखें"
     },
     "fields": {
       "selectLanguage": "अपनी भाषा चुनें",
-      "email": "ईमेल",
+      "email": "ईमेल पता",
       "password": "पासवर्ड",
       "firstName": "पहला नाम",
       "lastName": "अंतिम नाम",
-      "title": "नौकरी का शीर्षक",
+      "title": "जॉब टाइटल",
       "company": "कंपनी",
       "phone": "फ़ोन नंबर",
-      "linkedinUrl": "LinkedIn प्रोफ़ाइल URL"
+      "linkedinUrl": "LinkedIn प्रोफ़ाइल URL",
+      "primaryLink": "प्राथमिक लिंक"
     },
     "placeholders": {
-      "email": "your.email@company.com",
-      "password": "एक सुरक्षित पासवर्ड बनाएं",
-      "firstName": "राज",
-      "lastName": "शर्मा",
-      "title": "उत्पाद डिज़ाइनर",
-      "company": "Tech Innovations Inc.",
-      "phone": "+91 98765 43210",
-      "linkedinUrl": "https://linkedin.com/in/yourprofile"
+      "email": "youremail@example.com",
+      "password": "न्यूनतम 8 वर्ण",
+      "firstName": "उदा. रवि",
+      "lastName": "उदा. कुमार",
+      "title": "उदा. सॉफ़्टवेयर इंजीनियर",
+      "company": "उदा. टेक सॉल्यूशंस",
+      "phone": "उदा. +91 987 654 3210",
+      "linkedinUrl": "उदा. linkedin.com/in/username",
+      "url": "https://..."
     },
-    "buttons": {
-      "back": "वापस",
-      "next": "अगला",
-      "finish": "समाप्त करें"
+    "notifications": {
+      "welcome": "ConnectMe में आपका स्वागत है!"
     },
-    "signOut": "साइन आउट करें"
+    "steps": {
+      "language": {
+        "title": "ConnectMe में आपका स्वागत है",
+        "description": "कृपया अपनी पसंदीदा भाषा चुनें।"
+      },
+      "account": {
+        "title": "अपना खाता बनाएं",
+        "description": "अपना सुरक्षित लॉगिन विवरण सेट करें।"
+      },
+      "personal": {
+        "title": "आपसे मिलकर अच्छा लगा!",
+        "description": "आपके कार्ड पर क्या नाम दिखाई देना चाहिए?"
+      },
+      "professional": {
+        "title": "आप क्या करते हैं?",
+        "description": "अपना पेशेवर शीर्षक और कंपनी जोड़ें।"
+      },
+      "contact": {
+        "title": "लगभग हो गया!",
+        "description": "लोग आपसे कैसे संपर्क कर सकते हैं?"
+      }
+    }
+  },
+  "errors": {
+    "auth": {
+      "emailInUse": "यह ईमेल पहले से पंजीकृत है। इसके बजाय लॉग इन करने का प्रयास करें।",
+      "invalidEmail": "ईमेल पता मान्य नहीं है।",
+      "weakPassword": "पासवर्ड बहुत कमजोर है। कृपया कम से कम 8 वर्णों का उपयोग करें।",
+      "networkError": "नेटवर्क त्रुटि। कृपया अपना इंटरनेट कनेक्शन जांचें।",
+      "tooManyRequests": "बहुत सारे प्रयास। कृपया बाद में पुनः प्रयास करें।",
+      "generic": "एक अप्रत्याशित त्रुटि हुई। कृपया पुन: प्रयास करें।",
+      "invalidCredential": "अमान्य ईमेल या पासवर्ड। कृपया पुन: प्रयास करें।",
+      "userDisabled": "यह खाता व्यवस्थापक द्वारा अक्षम कर दिया गया है।",
+      "userNotFound": "इस ईमेल से कोई खाता नहीं मिला।",
+      "wrongPassword": "ग़लत पासवर्ड। कृपया पुन: प्रयास करें।",
+      "emailRequired": "कृपया पहले अपना ईमेल पता दर्ज करें।",
+      "reauthenticate": "हटाने से पहले अपनी पहचान सत्यापित करने के लिए कृपया लॉग आउट करें और फिर से लॉगिन करें।"
+    },
+    "validation": {
+      "emailInvalid": "अमान्य ईमेल पता",
+      "passwordWeak": "सुरक्षा आवश्यकता: 8+ वर्ण",
+      "nameShort": "पहला नाम बहुत छोटा है",
+      "lastNameRequired": "अंतिम नाम आवश्यक है",
+      "phoneInvalid": "अमान्य फ़ोन प्रारूप",
+      "linkedinInvalid": "अमान्य LinkedIn लिंक"
+    },
+    "contact": {
+      "invalidId": "संपर्क सहेजने के लिए एक वैध प्रोफ़ाइल ID आवश्यक है।"
+    }
   },
   "home": {
     "title": "होम",
     "greeting": "नमस्ते",
     "qrTitle": "आपका QR कोड",
-    "qrDescription": "दूसरों को अपनी जानकारी प्राप्त करने के लिए स्कैन करने दें",
+    "qrDescription": "अपना विवरण देने के लिए दूसरों को स्कैन करने दें",
     "buttons": {
       "shareQR": "QR कोड साझा करें",
       "scanQR": "QR कोड स्कैन करें",
@@ -108,44 +171,68 @@
     }
   },
   "qr": {
+    "share": {
+      "title": "मेरा डिजिटल बिज़नेस कार्ड",
+      "text": "{{name}} के साथ ConnectMe पर जुड़ें"
+    },
     "display": {
       "title": "मेरा QR कोड",
-      "description": "दूसरों को अपनी संपर्क जानकारी प्राप्त करने के लिए इस कोड को स्कैन करने दें",
+      "description": "अपने संपर्क विवरण देने के लिए दूसरों को यह कोड स्कैन करने दें",
       "shareButton": "QR कोड साझा करें",
       "downloadButton": "QR कोड डाउनलोड करें",
-      "backButton": "वापस"
+      "backButton": "पीछे",
+      "generating": "उत्पन्न किया जा रहा है",
+      "poweredBy": "ConnectMe Universal द्वारा संचालित"
     },
     "scanner": {
       "title": "QR कोड स्कैन करें",
       "description": "स्कैन करने के लिए अपने कैमरे को QR कोड पर इंगित करें",
-      "scanning": "स्कैन कर रहे हैं...",
-      "error": "कैमरा तक पहुँच नहीं हो सकी",
+      "scanning": "स्कैन हो रहा है...",
+      "error": "कैमरे तक नहीं पहुंच सकता",
+      "invalidVCard": "अमान्य या खाली vCard",
+      "notBusinessCard": "यह कोई व्यावसायिक कार्ड QR नहीं है।",
+      "new": "नया",
       "invalidQR": "अमान्य QR कोड",
-      "backButton": "वापस"
+      "backButton": "पीछे",
+      "contact": "संपर्क",
+      "captured": "✅ कैप्चर किया गया!",
+      "align": "QR कोड को फ्रेम के अंदर संरेखित करें",
+      "noReachMethod": "अपूर्ण डेटा: कोई फ़ोन या ईमेल नहीं मिला",
+      "invalid": "अमान्य क्यूआर कोड प्रारूप"
     }
   },
   "contacts": {
+    "addSuccess": "संपर्क सफलतापूर्वक जोड़ा गया!",
     "title": "संपर्क",
     "search": "संपर्क खोजें...",
     "empty": "अभी तक कोई संपर्क नहीं",
     "emptyDescription": "QR कोड स्कैन करके नेटवर्किंग शुरू करें",
-    "dateMet": "मिले",
-    "location": "में",
-    "backButton": "वापस"
+    "dateMet": "को मिले",
+    "location": "स्थान",
+    "backButton": "पीछे",
+    "alreadyInContacts": "संपर्क पहले से ही आपकी सूची में है",
+    "deleteSuccess": "संपर्क सफलतापूर्वक हटा दिया गया",
+    "deleteConfirmTitle": "संपर्क हटाएं",
+    "deleteConfirmMessage": "क्या आप वाकई इस संपर्क को हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती।"
   },
   "contactCard": {
     "title": "संपर्क कार्ड",
-    "saveButton": "संपर्कों में सहेजें",
+    "saveButton": "संपर्क सहेजें",
     "cancelButton": "रद्द करें",
     "saveSuccess": "संपर्क सफलतापूर्वक सहेजा गया!",
     "saveInfo": "संपर्क इसके साथ सहेजा जाएगा:",
     "saveDetails": {
-      "dateMet": "मिलने की तारीख:",
-      "linkedin": "संपर्क विवरण में LinkedIn प्रोफ़ाइल URL",
-      "notes": "आपके निजी नोट्स (केवल आपके लिए दृश्यमान)"
-    }
+      "dateMet": "मीटिंग की तिथि:",
+      "linkedin": "संपर्क विवरण में LinkedIn प्रोफ़ाइल",
+      "notes": "आपके निजी नोट्स (केवल आपको दिखाई देते हैं)"
+    },
+    "requestTitle": "कनेक्शन अनुरोध",
+    "locationLabel": "मिलने की जगह",
+    "alreadySaved": "पहले से ही संपर्कों में है",
+    "saveToPhone": "फ़ोन में सहेजें"
   },
   "contactDetail": {
+    "vcardNote": "ConnectMe के माध्यम से {{date}} को मिले",
     "title": "संपर्क विवरण",
     "tabs": {
       "info": "जानकारी",
@@ -157,19 +244,26 @@
       "email": "ईमेल",
       "linkedin": "LinkedIn",
       "company": "कंपनी",
-      "title": "शीर्षक"
+      "title": "पद",
+      "addToDevice": "डिवाइस में जोड़ें",
+      "exportVCard": "vCard निर्यात करें",
+      "headline": "हेडलाइन",
+      "socialWeb": "सोशल और वेब",
+      "additionalInfo": "अतिरिक्त जानकारी",
+      "scannedMessage": "स्कैन किया गया संदेश"
     },
     "notes": {
       "title": "निजी नोट्स",
-      "placeholder": "इस संपर्क के बारे में निजी नोट्स जोड़ें...\n\nये नोट्स निजी हैं और केवल आपके लिए दृश्यमान हैं।",
+      "placeholder": "इस संपर्क के बारे में निजी नोट्स जोड़ें...\n\nये नोट्स निजी हैं और केवल आपको दिखाई देते हैं।",
       "saveButton": "नोट्स सहेजें",
       "voiceButton": "वॉयस इनपुट",
-      "listening": "सुन रहे हैं...",
+      "listening": "सुन रहा है...",
+      "voiceTriggered": "वॉयस इनपुट चालू हो गया",
       "tapToStop": "रोकने के लिए टैप करें",
       "saveSuccess": "नोट्स सफलतापूर्वक सहेजे गए!"
     },
     "history": {
-      "title": "मीटिंग इतिहास",
+      "title": "मीटिंग का इतिहास",
       "firstMet": "पहली मुलाकात",
       "location": "स्थान"
     },
@@ -177,7 +271,8 @@
       "call": "कॉल करें",
       "email": "ईमेल",
       "viewLinkedIn": "LinkedIn देखें",
-      "backButton": "वापस"
+      "backButton": "पीछे",
+      "delete": "संपर्क हटाएं"
     }
   },
   "profile": {
@@ -188,20 +283,40 @@
         "upload": "फ़ोटो अपलोड करें",
         "change": "फ़ोटो बदलें",
         "remove": "फ़ोटो हटाएं",
-        "description": "अपने डिजिटल बिज़नेस कार्ड को वैयक्तिकृत करने के लिए प्रोफ़ाइल फ़ोटो जोड़ें"
+        "description": "अपने डिजिटल बिज़नेस कार्ड को वैयक्तिकृत करने के लिए एक प्रोफ़ाइल फ़ोटो जोड़ें"
+      },
+      "emails": {
+        "title": "संपर्क ईमेल",
+        "selectType": "ईमेल प्रकार चुनें"
+      },
+      "links": {
+        "title": "सोशल और वेब लिंक",
+        "selectPlatform": "प्लेटफ़ॉर्म चुनें"
+      },
+      "types": {
+        "work": "काम",
+        "personal": "व्यक्तिगत",
+        "other": "अन्य"
+      },
+      "platforms": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "other": "अन्य"
       },
       "fields": {
         "firstName": "पहला नाम",
         "lastName": "अंतिम नाम",
-        "title": "नौकरी का शीर्षक",
+        "title": "जॉब टाइटल",
         "company": "कंपनी",
-        "email": "ईमेल",
+        "email": "ईमेल पता",
         "phone": "फ़ोन",
-        "linkedinUrl": "LinkedIn प्रोफ़ाइल URL"
+        "bio": "परिचय",
+        "bioPlaceholder": "संक्षेप में बताएं कि आप क्या करते हैं...",
+        "linkedinUrl": "LinkedIn URL"
       },
       "language": {
-        "title": "भाषा",
-        "label": "पसंदीदा भाषा"
+        "title": "भाषा चुनें",
+        "label": "भाषा"
       },
       "buttons": {
         "save": "परिवर्तन सहेजें",
@@ -211,15 +326,79 @@
     }
   },
   "common": {
-    "back": "वापस",
+    "back": "पीछे",
     "save": "सहेजें",
+    "saved": "सहेजा गया",
     "cancel": "रद्द करें",
+    "skip": "छोड़ें",
+    "continue": "जारी रखें",
+    "optional": "वैकल्पिक",
+    "optionalShort": "वैकल्पिक",
     "delete": "हटाएं",
     "edit": "संपादित करें",
     "close": "बंद करें",
     "loading": "लोड हो रहा है...",
     "error": "त्रुटि",
     "success": "सफलता",
-    "required": "आवश्यक"
+    "required": "आवश्यक",
+    "share": "साझा करें",
+    "verify": "सत्यापित करें",
+    "add": "ईमेल जोड़ें",
+    "addLink": "लिंक जोड़ें",
+    "today": "आज",
+    "exported": "संपर्कों में निर्यात किया गया",
+    "phone": "फ़ोन",
+    "email": "ईमेल",
+    "dateNotAvailable": "तिथि उपलब्ध नहीं है",
+    "confirm": "पुष्टि करें",
+    "logout": "लॉग आउट",
+    "next": "अगला",
+    "previous": "पिछला",
+    "gotIt": "समझ गए",
+    "ok": "ठीक है"
+  },
+  "quickShare": {
+    "scan": "कोड स्कैन करें",
+    "myQr": "मेरा QR",
+    "contacts": "संपर्क",
+    "edit": "प्रोफ़ाइल संपादित करें"
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "security": "सुरक्षा",
+    "currentPassword": "वर्तमान पासवर्ड",
+    "newPassword": "नया पासवर्ड",
+    "confirmPassword": "नए पासवर्ड की पुष्टि करें",
+    "updatePassword": "पासवर्ड अपडेट करें",
+    "fillAllFields": "कृपया सभी पासवर्ड फ़ील्ड भरें",
+    "passwordTooShort": "नया पासवर्ड कम से कम 6 अक्षरों का होना चाहिए",
+    "passwordMismatch": "नए पासवर्ड मेल नहीं खाते",
+    "passwordUpdated": "पासवर्ड सफलतापूर्वक बदल गया!",
+    "accountActions": "खाता",
+    "deleteAccount": "खाता हटाएं",
+    "deleteTitle": "खाता हटाएं",
+    "deleteConfirm": "क्या आप वाकई ऐसा करना चाहते हैं? यह कार्रवाई स्थायी है।",
+    "deleteSuccess": "खाता पूरी तरह से हटा दिया गया",
+    "deletePartial": "डेटा मिटा दिया गया। अगली बार लॉगिन करने पर ईमेल हटा दिया जाएगा।",
+    "verifyTitle": "पासवर्ड की पुष्टि करें",
+    "verifyDesc": "हटाने को अधिकृत करने के लिए कृपया अपना पासवर्ड दर्ज करें:"
+  },
+  "guide": {
+    "edit": {
+      "title": "प्रोफ़ाइल कस्टमाइज़ करें",
+      "desc": "अपनी फ़ोटो और सोशल लिंक जोड़ने के लिए यहां टैप करें।"
+    },
+    "share": {
+      "title": "अपना QR साझा करें",
+      "desc": "दूसरों को अपना संपर्क सहेजने देने के लिए इसे दिखाएं।"
+    },
+    "scan": {
+      "title": "स्कैन करें और जुड़ें",
+      "desc": "बिजनेस कार्ड और अन्य ConnectMe उपयोगकर्ताओं को स्कैन करने के लिए इसका उपयोग करें।"
+    },
+    "contacts": {
+      "title": "संपर्क",
+      "desc": "अपने सभी सहेजे गए कनेक्शन यहां ढूंढें।"
+    }
   }
 }
