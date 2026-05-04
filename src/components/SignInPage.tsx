@@ -11,13 +11,13 @@ import {
   Platform,
   Alert,
   Image,
-  BackHandler // ✅ Added BackHandler
+  BackHandler 
 } from 'react-native';
-// ✅ Imported SafeAreaView for consistent edge control
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ArrowLeft } from 'lucide-react-native'; 
+// ✅ Imported Eye and EyeOff icons
+import { ArrowLeft, Eye, EyeOff } from 'lucide-react-native'; 
 import NetInfo from '@react-native-community/netinfo';
-import { useTheme } from '../contexts/ThemeContext'; // ✅ Global Theme Sync
+import { useTheme } from '../contexts/ThemeContext'; 
 
 const getSignInErrorMessage = (errorCode: string, t: any) => {
   switch (errorCode) {
@@ -49,25 +49,24 @@ export function SignInPage({ onSignIn, onForgotPassword, onBack, onSignUp }: Sig
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   
-  // ✅ Replaced local colorScheme with Global Theme Context
   const { theme, isDark } = useTheme();
-  // Preserve the specific contrast behavior you had for inputs
   const inputBg = isDark ? theme.cardBg : '#f4f4f5';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // ✅ NEW: Boolean state for password visibility
+  const [showPassword, setShowPassword] = useState(false);
   const [signInError, setSignInError] = useState<string | null>(null);
   const [isResetMode, setIsResetMode] = useState(false);
 
-  // ✅ NEW: Native Mobile Back Button Handler
   useEffect(() => {
     const backAction = () => {
       if (isResetMode) {
-        setIsResetMode(false); // Go back to login form
+        setIsResetMode(false); 
       } else {
-        onBack(); // Go back to Landing Page
+        onBack(); 
       }
-      return true; // Prevents the default OS back action
+      return true; 
     };
 
     const backHandler = BackHandler.addEventListener(
@@ -75,7 +74,7 @@ export function SignInPage({ onSignIn, onForgotPassword, onBack, onSignUp }: Sig
       backAction
     );
 
-    return () => backHandler.remove(); // Cleanup when unmounted
+    return () => backHandler.remove(); 
   }, [isResetMode, onBack]);
 
   const handleSignIn = async () => {
@@ -121,14 +120,12 @@ export function SignInPage({ onSignIn, onForgotPassword, onBack, onSignUp }: Sig
     <SafeAreaView style={[styles.container, { backgroundColor: theme.bg }]} edges={['bottom']}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         
-        {/* 🔝 Consistent Zero-Gap Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={isResetMode ? () => setIsResetMode(false) : onBack} style={styles.backButtonArea}>
             <ArrowLeft size={28} color={theme.textMain} />
           </TouchableOpacity>
         </View>
 
-        {/* 🖼️ 65% Body: Form Content */}
         <View style={styles.bodyFlex}>
           <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
             
@@ -161,15 +158,28 @@ export function SignInPage({ onSignIn, onForgotPassword, onBack, onSignUp }: Sig
               />
 
               {!isResetMode && (
-                <TextInput
-                  style={[styles.input, { backgroundColor: inputBg, color: theme.textMain }]}
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry
-                  autoCapitalize="none"
-                  placeholder={t('auth.passwordPlaceholder', 'Enter Password')}
-                  placeholderTextColor={theme.textSub}
-                />
+                // ✅ NEW: Wrapped Password Input with Toggle
+                <View style={[styles.passwordContainer, { backgroundColor: inputBg }]}>
+                  <TextInput
+                    style={[styles.passwordInput, { color: theme.textMain }]}
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry={!showPassword}
+                    autoCapitalize="none"
+                    placeholder={t('auth.passwordPlaceholder', 'Enter Password')}
+                    placeholderTextColor={theme.textSub}
+                  />
+                  <TouchableOpacity 
+                    style={styles.eyeIcon} 
+                    onPress={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOff size={22} color={theme.textSub} />
+                    ) : (
+                      <Eye size={22} color={theme.textSub} />
+                    )}
+                  </TouchableOpacity>
+                </View>
               )}
 
               {!isResetMode && (
@@ -192,7 +202,6 @@ export function SignInPage({ onSignIn, onForgotPassword, onBack, onSignUp }: Sig
           </ScrollView>
         </View>
 
-        {/* 📌 25% Footer: Sign Up & Google Auth */}
         <View style={styles.footerFlex}>
           {!isResetMode && (
             <>
@@ -206,7 +215,6 @@ export function SignInPage({ onSignIn, onForgotPassword, onBack, onSignUp }: Sig
                   </Text>
                 </TouchableOpacity>
               </View>
-
             </>
           )}
         </View>
@@ -245,6 +253,26 @@ const styles = StyleSheet.create({
   
   form: { width: '100%', gap: 16 },
   input: { height: 60, borderRadius: 16, paddingHorizontal: 20, fontSize: 16, fontWeight: '500' },
+  
+  // ✅ NEW: Password Container Styles
+  passwordContainer: { 
+    height: 60, 
+    borderRadius: 16, 
+    flexDirection: 'row', 
+    alignItems: 'center' 
+  },
+  passwordInput: { 
+    flex: 1, 
+    height: '100%', 
+    paddingHorizontal: 20, 
+    fontSize: 16, 
+    fontWeight: '500' 
+  },
+  eyeIcon: { 
+    padding: 15, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
   
   row: { flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', marginTop: 4, paddingHorizontal: 4 },
   forgotText: { fontSize: 14, fontWeight: 'bold' },

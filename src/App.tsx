@@ -144,7 +144,9 @@ function AppContent() {
   const handleScan = async (rawData: any, resetScanner: () => void) => {
     try {
       const dataString = typeof rawData === 'string' ? rawData : JSON.stringify(rawData);
-      const result = ScannerService.parse(dataString);
+      
+      // ✅ 1. Use the Async Parser we built earlier
+      const result = await ScannerService.parseAsync(dataString);
 
       if (!result.isValid) {
         showToast(t('qr.scanner.noReachMethod'), "error");
@@ -152,11 +154,9 @@ function AppContent() {
         return; 
       }
 
+      // ✅ 2. The 'result.profile' now contains the image fetched from Firebase
       let finalProfile = { ...result.profile };
       let targetUid = result.connectMeId; 
-
-      // 🛑 SUSPENDED: Location fetching removed to ensure instant scanning
-      // LocationService.getCurrentLocationName().then(...) 
 
       if (result.connectMeId) {
         try {
@@ -167,25 +167,19 @@ function AppContent() {
             targetUid = usernameSnap.data().uid; 
           }
 
-          if (targetUid) {
-            // Scanner fetches Owner's live profile to get missing data (like image)
-            const liveProfile = await ContactService.getProfileById(targetUid);
-            if (liveProfile && liveProfile.profileImage) {
-              finalProfile.profileImage = liveProfile.profileImage;
-            }
-            
-            if (user && authUserProfile) {
-              // Scanner sends their ACTIVE CARD as the handshake
-              const myActiveCard = authUserProfile.cards?.[activeIndex] || authUserProfile;
-              const myProfilePayload = { ...myActiveCard, id: user.uid } as UserProfile;
-              await ContactService.sendConnectionRequest(user.uid, myProfilePayload, targetUid);
-            }
+          // ✅ 3. Auto-Handshake: Send card to the owner of the QR
+          if (targetUid && user && authUserProfile) {
+            const myActiveCard = authUserProfile.cards?.[activeIndex] || authUserProfile;
+            const myProfilePayload = { ...myActiveCard, id: user.uid } as UserProfile;
+            await ContactService.sendConnectionRequest(user.uid, myProfilePayload, targetUid);
           }
         } catch (fetchError) {
-          console.error("Error during live fetch/handshake:", fetchError);
+          console.error("Connection request failed:", fetchError);
         }
       }
 
+      // ✅ 4. Finalize the scan with the profile that now includes the image
+      console.log("🚀 [LOG 4] Sending data to ContactCard. Does finalProfile have an image?", !!finalProfile.profileImage);
       finalizeScan(finalProfile, targetUid);
     } catch (error) {
       showToast(t('qr.scanner.invalid'), "error");

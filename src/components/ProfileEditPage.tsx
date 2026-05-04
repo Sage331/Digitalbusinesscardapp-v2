@@ -47,9 +47,19 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
   const [pickerType, setPickerType] = useState<'email' | 'link'>('email');
   const [activeItemIndex, setActiveItemIndex] = useState<number | null>(null);
 
+  // Helper to fix X and GitHub visibility in Dark Mode
+  const getThemeAwareColor = (platform: string, originalColor: string) => {
+    const p = platform.toLowerCase();
+    if (isDark && (p === 'x' || p === 'github')) {
+      return '#f3f4f6'; // Light gray for dark mode contrast
+    }
+    return originalColor;
+  };
+
   const renderSocialIcon = (platform: string) => {
     const config = SUPPORTED_SOCIALS[platform.toLowerCase()] || SUPPORTED_SOCIALS['other'];
-    return <FontAwesome5 name={config.icon} size={18} color={config.color} />;
+    const displayColor = getThemeAwareColor(platform, config.color);
+    return <FontAwesome5 name={config.icon} size={18} color={displayColor} />;
   };
 
   const handleLinkChange = (index: number, url: string) => {
@@ -145,6 +155,8 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
             <ScrollView style={{ maxHeight: 400 }} showsVerticalScrollIndicator={false}>
               {options.map((option) => {
                 const config = !isEmail ? (SUPPORTED_SOCIALS[option] || SUPPORTED_SOCIALS['other']) : null;
+                const displayColor = config ? getThemeAwareColor(option, config.color) : undefined;
+                
                 return (
                   <TouchableOpacity
                     key={option}
@@ -156,8 +168,8 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
                     }}
                   >
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-                      {!isEmail && <FontAwesome5 name={config?.icon} size={16} color={config?.color} />}
-                      <Text style={[styles.pickerOptionText, !isEmail && { color: config?.color }]}>
+                      {!isEmail && <FontAwesome5 name={config?.icon} size={16} color={displayColor} />}
+                      <Text style={[styles.pickerOptionText, !isEmail && { color: displayColor }]}>
                         {option.toUpperCase()}
                       </Text>
                     </View>
@@ -295,13 +307,15 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
             <View style={styles.socialStack}>
               {(editedProfile.links || []).map((link, index) => {
                 const config = SUPPORTED_SOCIALS[link.platform.toLowerCase()] || SUPPORTED_SOCIALS['other'];
+                const displayColor = getThemeAwareColor(link.platform, config.color);
+                
                 return (
                   <View key={index} style={[styles.flatSocialRow, { backgroundColor: inputBg }]}>
                     <TouchableOpacity 
                       style={[styles.socialIconBtn, { borderRightColor: theme.border }]}
                       onPress={() => openPlatformPicker(index)}
                     >
-                      {renderSocialIcon(link.platform)}
+                      <FontAwesome5 name={config.icon} size={18} color={displayColor} />
                       <ChevronDown size={12} color={theme.textSub} style={{ marginLeft: 2 }} />
                     </TouchableOpacity>
 

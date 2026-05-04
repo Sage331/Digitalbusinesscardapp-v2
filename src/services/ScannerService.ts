@@ -1,23 +1,87 @@
 // src/services/ScannerService.ts
 import { UserProfile, SUPPORTED_SOCIALS } from '../types';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 export interface ParsedResult {
   profile: Partial<UserProfile>;
   connectMeId: string | null;
-  isValid: boolean; // ✅ Validation Gate
+  isValid: boolean; 
 }
 
 export class ScannerService {
+  
+  static async parseAsync(rawData: string): Promise<ParsedResult> {
+    const baseResult = this.parse(rawData);
+
+    if (!baseResult.connectMeId) {
+      return baseResult;
+    }
+
+    try {
+      const usernameRef = doc(db, 'usernames', baseResult.connectMeId);
+      const usernameSnap = await getDoc(usernameRef);
+      
+      let targetUid = baseResult.connectMeId; 
+      
+      if (usernameSnap.exists()) {
+        targetUid = usernameSnap.data().uid; 
+        console.log("🔍 [LOG 1] Username resolved to UID:", targetUid);
+      } else {
+        console.log("⚠️ [LOG 1] Username NOT found in 'usernames' collection. Using raw ID.");
+      }
+
+      const userRef = doc(db, 'users', targetUid);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const liveData = userSnap.data() as any; 
+
+        // 🚀 THE ROUTING FIX: Check Root -> Check Card 0 -> Fallback
+        const routedImage = liveData.profileImage || 
+                            liveData.cards?.[0]?.profileImage || 
+                            baseResult.profile.profileImage;
+
+        console.log("🔥 [LOG 2] Firebase Document Found! Routed Image present?", !!routedImage);
+
+        baseResult.profile = {
+          ...baseResult.profile, 
+          firstName: liveData.firstName || baseResult.profile.firstName,
+          lastName: liveData.lastName || baseResult.profile.lastName,
+          title: liveData.title || liveData.cards?.[0]?.title || baseResult.profile.title,
+          company: liveData.company || liveData.cards?.[0]?.company || baseResult.profile.company,
+          profileImage: routedImage, // 📸 THE PICTURE (Routed)
+          bio: liveData.bio || liveData.cards?.[0]?.bio || baseResult.profile.bio,
+          phone: liveData.phone || baseResult.profile.phone,
+          
+          links: liveData.links && liveData.links.length > 0 ? liveData.links : baseResult.profile.links,
+          emails: liveData.emails && liveData.emails.length > 0 ? liveData.emails : baseResult.profile.emails,
+          
+          metadata: baseResult.profile.metadata
+        };
+
+        console.log("📦 [LOG 3] Merged Profile Image Value:", baseResult.profile.profileImage ? "It's there!" : "It's EMPTY!");
+
+        baseResult.isValid = true;
+      } else {
+        console.log("❌ [LOG 2] Firebase Document NOT FOUND for UID:", targetUid);
+      }
+    } catch (error) {
+      console.warn("Scanner Service: Failed to fetch live profile data. Falling back to static QR text.", error);
+    }
+
+    return baseResult;
+  }
+
+  // ⬇️ EXISTING SYNCHRONOUS LOGIC REMAINS UNCHANGED ⬇️
   static parse(rawData: string): ParsedResult {
     const cleanData = rawData.trim();
     let profile: any = { links: [], emails: [], metadata: {} };
     let connectMeId: string | null = null;
 
-    // 1. Extract ConnectMeID immediately
     const idMatch = cleanData.match(/ConnectMeID:([a-zA-Z0-9_-]+)/i);
     if (idMatch) connectMeId = idMatch[1];
 
-    // 2. Structural Parsing (vCard or MeCard)
     const lines = cleanData.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
     if (cleanData.toUpperCase().includes('BEGIN:VCARD')) {
       profile = this.parseVCard(lines, !!connectMeId);
@@ -25,7 +89,6 @@ export class ScannerService {
       profile = this.parseMeCard(cleanData);
     }
 
-    // 3. 🧠 SMART PATTERN HUNTING (For Plain Text or Missing Tags)
     if (!profile.email) {
       const emailMatch = cleanData.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
       if (emailMatch) {
@@ -42,19 +105,16 @@ export class ScannerService {
     const urlMatch = cleanData.match(/(https?:\/\/[^\s]+)/i);
     if (urlMatch) { profile.links.push({ platform: this.detectPlatform(urlMatch[0]), url: urlMatch[0] });}
 
-    // 4. 🛡️ VALIDATION & IDENTITY FALLBACK
     return this.validateAndFinalize(profile, connectMeId);
   }
 
   private static validateAndFinalize(profile: any, id: string | null): ParsedResult {
-    // A scan is VALID only if it has an Email, Phone, or Website/Social Link
     const hasEmail = !!profile.email;
     const hasPhone = !!profile.phone;
     const hasLink = profile.links && profile.links.length > 0;
     
     const isValid = hasEmail || hasPhone || hasLink;
 
-    // 👤 SMART IDENTITY: If name is missing, use fallbacks
     if (!profile.firstName || profile.firstName.trim() === "") {
       if (profile.email) {
         profile.firstName = profile.email.split('@')[0];
@@ -126,7 +186,6 @@ export class ScannerService {
           break;
 
         case 'ADR': 
-          // 🚀 FIX: Map the clean address to metadata so the UI renders it in "Additional Info"
           const cleanAddress = val.split(';').filter(p => p.trim().length > 0).join(', '); 
           profile.metadata['location'] = cleanAddress;
           break;
@@ -176,12 +235,10 @@ export class ScannerService {
     return detected || 'other'; 
   }
 
-  // 🚀 FULL REWRITE: MECARD parser now loops and captures ALL data like the vCard parser does
   private static parseMeCard(data: string): Partial<UserProfile> {
     const profile: any = { links: [], emails: [], metadata: {} };
     const cleanData = data.replace(/^MECARD:/i, '');
     
-    // MECARD splits distinct fields with a semicolon
     const parts = cleanData.split(';');
     
     parts.forEach(part => {
@@ -189,7 +246,6 @@ export class ScannerService {
       if (colonIdx === -1) return;
 
       const key = part.substring(0, colonIdx).toUpperCase();
-      // Using substring instead of split ensures we don't break URLs containing colons
       const val = part.substring(colonIdx + 1).trim();
 
       if (!val) return;
@@ -217,19 +273,17 @@ export class ScannerService {
         case 'ORG':
           profile.company = val;
           break;
-        case 'TIL': // MECARD uses TIL for Title
+        case 'TIL': 
           profile.title = val;
           break;
         case 'NOTE':
           profile.bio = val;
           break;
         case 'ADR':
-          // 🚀 FIX: Formats the MECARD address and assigns it to location metadata
           const cleanAdr = val.replace(/,/g, ', ').replace(/\s+/g, ' '); 
           profile.metadata['location'] = cleanAdr;
           break;
         default:
-          // 📥 CATCH-ALL: Push anything unexpected into metadata
           profile.metadata[key.toLowerCase()] = val;
           break;
       }

@@ -5,12 +5,13 @@ import {
   View, 
   Text, 
   TouchableOpacity, 
-  Vibration 
+  Vibration,
+  ActivityIndicator // ✅ Brought back for the loading state
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'; 
 import { ArrowLeft } from 'lucide-react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
-import { useTheme } from '../contexts/ThemeContext'; // ✅ Global Theme Sync
+import { useTheme } from '../contexts/ThemeContext';
 
 interface QRScannerPageProps {
   onScan: (data: string, reset: () => void) => void;
@@ -22,7 +23,6 @@ export function QRScannerPage({ onScan, onBack }: QRScannerPageProps) {
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
   
-  // ✅ Hooked into Central Theme
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -57,6 +57,7 @@ export function QRScannerPage({ onScan, onBack }: QRScannerPageProps) {
       Vibration.vibrate(100);
       setScanned(true); 
 
+      // ✅ Passes the data to the parent (which runs ScannerService.parseAsync in the background)
       onScan(fullData, () => setScanned(false));
     }
   };
@@ -70,15 +71,24 @@ export function QRScannerPage({ onScan, onBack }: QRScannerPageProps) {
         responsiveOrientationWhenOrientationLocked={false}
       />
 
+      {/* ✅ RESTORED: The Central Processing Overlay */}
+      {scanned && (
+        <View style={styles.fetchingOverlay}>
+          <ActivityIndicator size="large" color={theme.primary} />
+          <Text style={styles.fetchingText}>
+            {t('qr.scanner.processing', 'Processing...')}
+          </Text>
+        </View>
+      )}
+
       <SafeAreaView style={styles.headerOverlay} edges={['bottom']}>
-        <TouchableOpacity onPress={onBack} style={styles.backButton}>
+        <TouchableOpacity onPress={onBack} style={styles.backButton} disabled={scanned}>
           <ArrowLeft size={24} color="white" />
         </TouchableOpacity>
       </SafeAreaView>
 
       <View style={styles.overlayFrame}>
         <View style={styles.scanBox}>
-          {/* ✅ Connect scanner frame to theme.primary */}
           <View style={[styles.corner, styles.topLeft, { borderColor: theme.primary }]} />
           <View style={[styles.corner, styles.topRight, { borderColor: theme.primary }]} />
           <View style={[styles.corner, styles.bottomLeft, { borderColor: theme.primary }]} />
@@ -86,13 +96,17 @@ export function QRScannerPage({ onScan, onBack }: QRScannerPageProps) {
         </View>
       </View>
 
-      <View style={styles.footerOverlay}>
-        <View style={styles.pill}>
-          <Text style={styles.pillText}>
-            {scanned ? "⌛ " + t('common.processing', 'Processing...') : t('qr.scanner.align', 'Align QR inside the frame')}
-          </Text>
+      {/* ✅ HIDES IMMEDIATELY: Disappears the moment 'scanned' becomes true */}
+      {!scanned && (
+        <View style={styles.footerOverlay}>
+          <View style={styles.pill}>
+            <Text style={styles.pillText}>
+              {t('qr.scanner.align', 'Align QR inside the frame')}
+            </Text>
+          </View>
         </View>
-      </View>
+      )}
+
     </View>
   );
 }
@@ -103,8 +117,10 @@ const styles = StyleSheet.create({
   errorText: { color: 'white', fontSize: 16, marginBottom: 20 },
   permissionBtn: { paddingHorizontal: 24, paddingVertical: 12, borderRadius: 12 },
   permissionBtnText: { color: 'white', fontWeight: 'bold' },
+  
   headerOverlay: { position: 'absolute', top: 0, left: 0, right: 0, zIndex: 20, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 24, paddingTop: 6, paddingBottom: 12 },
   backButton: { width: 40, height: 40, backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: 20, justifyContent: 'center', alignItems: 'center' },
+  
   overlayFrame: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   scanBox: { width: 280, height: 280, position: 'relative' },
   corner: { position: 'absolute', width: 40, height: 40, borderWidth: 4 },
@@ -112,7 +128,23 @@ const styles = StyleSheet.create({
   topRight: { top: 0, right: 0, borderLeftWidth: 0, borderBottomWidth: 0, borderTopRightRadius: 16 },
   bottomLeft: { bottom: 0, left: 0, borderRightWidth: 0, borderTopWidth: 0, borderBottomLeftRadius: 16 },
   bottomRight: { bottom: 0, right: 0, borderLeftWidth: 0, borderTopWidth: 0, borderBottomRightRadius: 16 },
-  footerOverlay: { position: 'absolute', bottom: 100, left: 0, right: 0, alignItems: 'center' },
-  pill: { backgroundColor: 'rgba(0,0,0,0.6)', paddingHorizontal: 20, paddingVertical: 10, borderRadius: 25 },
-  pillText: { color: 'white', fontWeight: 'bold' }
+  
+  footerOverlay: { position: 'absolute', bottom: 100, left: 0, right: 0, alignItems: 'center', zIndex: 20 },
+  pill: { backgroundColor: 'rgba(0,0,0,0.6)', paddingHorizontal: 20, paddingVertical: 10, borderRadius: 25, flexDirection: 'row', alignItems: 'center' },
+  pillText: { color: 'white', fontWeight: 'bold' },
+
+  fetchingOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    zIndex: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fetchingText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 16,
+    letterSpacing: 0.5
+  }
 });

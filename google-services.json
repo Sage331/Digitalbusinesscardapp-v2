@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "967986320464-0d33bfpk1j4h09fm0h84fp802iib2tm9.apps.googleusercontent.com",
+          "client_id": "967986320464-69kb85qrt0v0bg22lsi5v7uhhrdf2dah.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.samueladeitan.businesscardapp",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "0501f1bc890bca1c83ddc84833c25dff4af64871"
+          }
+        },
+        {
+          "client_id": "967986320464-b0r50tkc3tothis8dlotj4us26ld4d5t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samueladeitan.businesscardapp",
+            "certificate_hash": "aa476bb96ac030c87de9989d98e6f5d08ce4d21a"
           }
         },
         {

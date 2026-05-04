@@ -15,7 +15,8 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ArrowLeft, X as CloseIcon, Info } from 'lucide-react-native';
+// ✅ Imported Eye, EyeOff, and CheckCircle for the new password logic
+import { ArrowLeft, X as CloseIcon, Info, Eye, EyeOff, CheckCircle } from 'lucide-react-native';
 import { AntDesign, FontAwesome6 } from '@expo/vector-icons';
 import { UserProfile } from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -27,6 +28,7 @@ const getFriendlyErrorMessage = (errorCode: string, t: any) => {
   switch (errorCode) {
     case 'auth/email-already-in-use': return t('errors.auth.emailInUse', 'This email is already registered. Try logging in.');
     case 'auth/invalid-email': return t('errors.auth.invalidEmail', 'Please enter a valid email address.');
+    // Keep this as a fallback, though the UI checklist should prevent it from showing
     case 'auth/weak-password': return t('errors.auth.weakPassword', 'Password must be at least 8 characters long.');
     case 'auth/network-request-failed': return t('errors.auth.networkError', 'Network error. Please check your connection.');
     default: return t('errors.auth.generic', 'Sign up failed. Please try again.');
@@ -52,9 +54,12 @@ export function OnboardingFlow({
   
   const isGoogleUser = !!userProfile;
 
-  // ✅ ALWAYS start at step 0 so Google users can visually confirm their pre-filled name
   const [currentStep, setCurrentStep] = useState(0);
   const [password, setPassword] = useState('');
+  
+  // ✅ NEW: State for password visibility toggle
+  const [showPassword, setShowPassword] = useState(false);
+  
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [showSocialModal, setShowSocialModal] = useState(false);
@@ -72,6 +77,9 @@ export function OnboardingFlow({
     instagram: '',
     facebook: ''
   });
+
+  // ✅ Helper to check if password meets the 8-character rule
+  const isPasswordValid = password.length >= 8;
 
   useEffect(() => {
     if (isGoogleUser && userProfile) {
@@ -100,7 +108,6 @@ export function OnboardingFlow({
   ];
 
   const handleBack = () => {
-    // ✅ Allow all users to exit onboarding if they are on Step 0
     if (currentStep === 0) {
       onSignOut();
     } else {
@@ -141,7 +148,7 @@ export function OnboardingFlow({
     if (currentStep === 3 && !isGoogleUser) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(profile.email || '')) newErrors.email = t('errors.validation.emailInvalid', 'Valid email required');
-      if (password.length < 8) newErrors.password = t('errors.validation.passwordWeak', 'Must be at least 8 chars');
+      if (!isPasswordValid) newErrors.password = t('errors.validation.passwordWeak', 'Must be at least 8 chars');
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -183,29 +190,6 @@ export function OnboardingFlow({
     }
   };
 
-  const handleGoogleSignUp = async () => {
-    setGoogleLoading(true);
-    setSubmitError(null);
-    try {
-      const state = await NetInfo.fetch();
-      if (!state.isConnected) {
-        setSubmitError(t('errors.auth.noInternet', "Connection failed..."));
-        setGoogleLoading(false);
-        return; 
-      }
-
-      await signInWithGoogle();
-      await onComplete(profile as UserProfile);
-
-    } catch (error: any) {
-      if (error.code !== 'ASYNC_OP_IN_PROGRESS') {
-        setSubmitError(getFriendlyErrorMessage(error.code || error.message, t));
-      }
-    } finally {
-      setGoogleLoading(false);
-    }
-  };
-
   const saveSocials = () => {
     const newLinks: any[] = [];
     if (socialInputs.linkedin) newLinks.push({ platform: 'linkedin', url: socialInputs.linkedin, isPublic: true });
@@ -219,7 +203,7 @@ export function OnboardingFlow({
 
   const isNextDisabled = 
     (currentStep === 0 && (!profile.firstName?.trim() || !profile.lastName?.trim())) ||
-    (currentStep === 3 && !isGoogleUser && (!profile.email?.trim() || password.length < 8));
+    (currentStep === 3 && !isGoogleUser && (!profile.email?.trim() || !isPasswordValid));
 
   const isFinalStep = isGoogleUser ? currentStep === 2 : currentStep === 3;
 
@@ -247,7 +231,6 @@ export function OnboardingFlow({
           )}
 
           <View style={styles.formContainer}>
-            {/* ✅ Step 0 is now visible to EVERYONE. Google users will see it pre-filled. */}
             {currentStep === 0 && (
               <>
                 <TextInput 
@@ -315,14 +298,45 @@ export function OnboardingFlow({
                   placeholderTextColor={theme.textSub}
                   style={[styles.input, { backgroundColor: inputBg, color: theme.textMain }, errors.email && styles.inputError]}
                 />
-                <TextInput 
-                  value={password || ''} 
-                  onChangeText={setPassword}
-                  secureTextEntry
-                  placeholder={t('onboarding.placeholders.password', 'Enter Password')}
-                  placeholderTextColor={theme.textSub}
-                  style={[styles.input, { backgroundColor: inputBg, color: theme.textMain }, errors.password && styles.inputError]}
-                />
+                
+                {/* ✅ NEW: Wrapped Password Input with Toggle */}
+                <View>
+                  <View style={[styles.passwordContainer, { backgroundColor: inputBg }, errors.password && styles.inputError]}>
+                    <TextInput 
+                      value={password || ''} 
+                      onChangeText={setPassword}
+                      secureTextEntry={!showPassword}
+                      autoCapitalize="none"
+                      placeholder={t('onboarding.placeholders.password', 'Enter Password')}
+                      placeholderTextColor={theme.textSub}
+                      style={[styles.passwordInput, { color: theme.textMain }]}
+                    />
+                    <TouchableOpacity 
+                      style={styles.eyeIcon} 
+                      onPress={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <EyeOff size={22} color={theme.textSub} />
+                      ) : (
+                        <Eye size={22} color={theme.textSub} />
+                      )}
+                    </TouchableOpacity>
+                  </View>
+
+                  {/* ✅ NEW: Proactive Validation Checklist */}
+                  <View style={styles.checklistRow}>
+                    <CheckCircle 
+                      size={16} 
+                      color={isPasswordValid ? theme.primary : theme.textSub} 
+                    />
+                    <Text style={[
+                      styles.checklistText, 
+                      { color: isPasswordValid ? theme.primary : theme.textSub }
+                    ]}>
+                      Minimum 8 characters
+                    </Text>
+                  </View>
+                </View>
               </>
             )}
           </View>
@@ -355,8 +369,6 @@ export function OnboardingFlow({
               </Text>
             </TouchableOpacity>
           )}
-
-          {/* ✅ REMOVED: Google Button from Step 3 */}
 
         </View>
 
@@ -440,8 +452,44 @@ const styles = StyleSheet.create({
   errorBanner: { backgroundColor: '#fef2f2', borderLeftWidth: 4, borderLeftColor: '#ef4444', padding: 12, borderRadius: 8, marginBottom: 16 },
   errorText: { color: '#b91c1c', fontSize: 13, fontWeight: 'bold' },
   formContainer: { width: '100%', gap: 16 },
+  
+  // Standard Input Styles
   input: { height: 60, borderRadius: 16, paddingHorizontal: 20, fontSize: 16, fontWeight: '500' },
   inputError: { borderWidth: 2, borderColor: '#f87171' },
+  
+  // ✅ NEW: Password Container Styles
+  passwordContainer: { 
+    height: 60, 
+    borderRadius: 16, 
+    flexDirection: 'row', 
+    alignItems: 'center' 
+  },
+  passwordInput: { 
+    flex: 1, 
+    height: '100%', 
+    paddingHorizontal: 20, 
+    fontSize: 16, 
+    fontWeight: '500' 
+  },
+  eyeIcon: { 
+    padding: 15, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
+  
+  // ✅ NEW: Checklist Styles
+  checklistRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+    paddingHorizontal: 4,
+    gap: 6
+  },
+  checklistText: {
+    fontSize: 13,
+    fontWeight: '600'
+  },
+
   socialTriggerButton: { height: 60, borderRadius: 16, borderWidth: 1, alignItems: 'center', justifyContent: 'center', borderStyle: 'dashed' },
   socialTriggerText: { fontWeight: 'bold', fontSize: 16 },
   footer: { paddingHorizontal: 24, paddingTop: 16 },
@@ -450,8 +498,6 @@ const styles = StyleSheet.create({
   disabledBtn: { opacity: 0.6 },
   loginRow: { flexDirection: 'row', justifyContent: 'center', marginTop: 24 },
   skipLink: { alignSelf: 'center', marginTop: 24 },
-  googleBtn: { height: 60, borderRadius: 16, borderWidth: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 16 },
-  googleIconImage: { width: 20, height: 20, marginRight: 12, resizeMode: 'contain' },
   
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'flex-end' },
   modalContent: { width: '100%', borderTopLeftRadius: 32, borderTopRightRadius: 32, padding: 24, alignItems: 'center' },
