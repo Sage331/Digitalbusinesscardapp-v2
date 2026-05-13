@@ -185,16 +185,6 @@ export function IdentityHub({
                 </Text>
               </View>
 
-              <TouchableOpacity style={[styles.optionsBtn, { backgroundColor: theme.cardBg }]} onPress={() => { setOptionsModalVisible(false); handlePreviewPress(activeOptionsCard); }}>
-                <Text style={[styles.optionsBtnTextBlue, { color: theme.primary }]}>Share Card</Text>
-              </TouchableOpacity>
-              <View style={[styles.optionsDivider, { backgroundColor: theme.border }]} />
-
-              <TouchableOpacity style={[styles.optionsBtn, { backgroundColor: theme.cardBg }]} onPress={() => { setOptionsModalVisible(false); onEditCard(activeOptionsIndex); }}>
-                <Text style={[styles.optionsBtnTextBlue, { color: theme.primary }]}>Edit Card</Text>
-              </TouchableOpacity>
-              <View style={[styles.optionsDivider, { backgroundColor: theme.border }]} />
-
               <TouchableOpacity style={[styles.optionsBtn, { backgroundColor: theme.cardBg }]} onPress={() => { setOptionsModalVisible(false); onAddCard('duplicate', activeOptionsIndex); }}>
                 <Text style={[styles.optionsBtnTextBlue, { color: theme.primary }]}>Duplicate Card</Text>
               </TouchableOpacity>

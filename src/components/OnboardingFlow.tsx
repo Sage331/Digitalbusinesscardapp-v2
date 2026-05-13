@@ -28,7 +28,6 @@ const getFriendlyErrorMessage = (errorCode: string, t: any) => {
   switch (errorCode) {
     case 'auth/email-already-in-use': return t('errors.auth.emailInUse', 'This email is already registered. Try logging in.');
     case 'auth/invalid-email': return t('errors.auth.invalidEmail', 'Please enter a valid email address.');
-    // Keep this as a fallback, though the UI checklist should prevent it from showing
     case 'auth/weak-password': return t('errors.auth.weakPassword', 'Password must be at least 8 characters long.');
     case 'auth/network-request-failed': return t('errors.auth.networkError', 'Network error. Please check your connection.');
     default: return t('errors.auth.generic', 'Sign up failed. Please try again.');
@@ -57,7 +56,6 @@ export function OnboardingFlow({
   const [currentStep, setCurrentStep] = useState(0);
   const [password, setPassword] = useState('');
   
-  // ✅ NEW: State for password visibility toggle
   const [showPassword, setShowPassword] = useState(false);
   
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -65,6 +63,9 @@ export function OnboardingFlow({
   const [showSocialModal, setShowSocialModal] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false); 
   
+  // ✅ NEW: Loading state to prevent duplicate sign-ups
+  const [loading, setLoading] = useState(false);
+
   const [profile, setProfile] = useState<Partial<UserProfile>>({ 
     language: i18n.language as any,
     links: [],
@@ -78,7 +79,6 @@ export function OnboardingFlow({
     facebook: ''
   });
 
-  // ✅ Helper to check if password meets the 8-character rule
   const isPasswordValid = password.length >= 8;
 
   useEffect(() => {
@@ -108,6 +108,7 @@ export function OnboardingFlow({
   ];
 
   const handleBack = () => {
+    if (loading) return; // Prevent backing out while submitting
     if (currentStep === 0) {
       onSignOut();
     } else {
@@ -117,6 +118,8 @@ export function OnboardingFlow({
 
   useEffect(() => {
     const backAction = () => {
+      if (loading) return true; // Block hardware back during submit
+
       if (showSocialModal) {
         setShowSocialModal(false);
         return true;
@@ -136,9 +139,11 @@ export function OnboardingFlow({
     );
 
     return () => backHandler.remove();
-  }, [currentStep, showSocialModal, onSignOut]);
+  }, [currentStep, showSocialModal, onSignOut, loading]);
 
   const handleNext = async (skipToSetup = false) => {
+    if (loading) return; // Block double clicks
+
     let newErrors: Record<string, string> = {};
     
     if (currentStep === 0) {
@@ -178,15 +183,29 @@ export function OnboardingFlow({
   };
 
   const finishSetup = async () => {
+    if (loading) return;
+
     const state = await NetInfo.fetch();
     if (!state.isConnected) {
       setSubmitError(t('errors.auth.noInternet', "Connection failed..."));
       return; 
     }
+
+    setLoading(true);
+    setSubmitError(null);
+
+    // ✅ 15s Safety Net: Force-unlock if Firebase hangs indefinitely
+    const safetyTimer = setTimeout(() => {
+      setLoading(false);
+    }, 15000);
+
     try {
       await onComplete(profile as UserProfile, isGoogleUser ? undefined : password);
     } catch (error: any) { 
       setSubmitError(getFriendlyErrorMessage(error.code || error.message, t)); 
+    } finally {
+      clearTimeout(safetyTimer);
+      setLoading(false); // ✅ Guaranteed to run
     }
   };
 
@@ -212,10 +231,10 @@ export function OnboardingFlow({
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         
         <View style={styles.header}>
-          <TouchableOpacity onPress={handleBack} style={styles.backButtonArea}>
+          <TouchableOpacity onPress={handleBack} style={styles.backButtonArea} disabled={loading}>
             <ArrowLeft size={28} color={theme.textMain} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={onSignOut}>
+          <TouchableOpacity onPress={onSignOut} disabled={loading}>
             <Text style={[styles.cancelText, { color: theme.textSub }]}>{t('common.cancel', 'Cancel')}</Text>
           </TouchableOpacity>
         </View>
@@ -238,6 +257,7 @@ export function OnboardingFlow({
                   onChangeText={(text) => setProfile({...profile, firstName: text})}
                   placeholder={t('onboarding.placeholders.firstName', 'Enter First Name')}
                   placeholderTextColor={theme.textSub}
+                  editable={!loading}
                   style={[styles.input, { backgroundColor: inputBg, color: theme.textMain }, errors.firstName && styles.inputError]}
                 />
                 <TextInput 
@@ -245,6 +265,7 @@ export function OnboardingFlow({
                   onChangeText={(text) => setProfile({...profile, lastName: text})}
                   placeholder={t('onboarding.placeholders.lastName', 'Enter Last Name')}
                   placeholderTextColor={theme.textSub}
+                  editable={!loading}
                   style={[styles.input, { backgroundColor: inputBg, color: theme.textMain }, errors.lastName && styles.inputError]}
                 />
               </>
@@ -257,6 +278,7 @@ export function OnboardingFlow({
                   onChangeText={(text) => setProfile({...profile, title: text})}
                   placeholder={t('onboarding.placeholders.title', 'Enter Job Title')}
                   placeholderTextColor={theme.textSub}
+                  editable={!loading}
                   style={[styles.input, { backgroundColor: inputBg, color: theme.textMain }]}
                 />
                 <TextInput 
@@ -264,6 +286,7 @@ export function OnboardingFlow({
                   onChangeText={(text) => setProfile({...profile, company: text})}
                   placeholder={t('onboarding.placeholders.company', 'Enter Your Company')}
                   placeholderTextColor={theme.textSub}
+                  editable={!loading}
                   style={[styles.input, { backgroundColor: inputBg, color: theme.textMain }]}
                 />
               </>
@@ -277,9 +300,14 @@ export function OnboardingFlow({
                   keyboardType="phone-pad"
                   placeholder={t('onboarding.placeholders.phone', 'Enter Phone Number')}
                   placeholderTextColor={theme.textSub}
+                  editable={!loading}
                   style={[styles.input, { backgroundColor: inputBg, color: theme.textMain }]}
                 />
-                <TouchableOpacity style={[styles.socialTriggerButton, { borderColor: theme.border }]} onPress={() => setShowSocialModal(true)}>
+                <TouchableOpacity 
+                  style={[styles.socialTriggerButton, { borderColor: theme.border }]} 
+                  onPress={() => setShowSocialModal(true)}
+                  disabled={loading}
+                >
                   <Text style={[styles.socialTriggerText, { color: theme.primary }]}>
                     + {t('onboarding.buttons.addSocials', 'Add Social Links')}
                   </Text>
@@ -296,10 +324,10 @@ export function OnboardingFlow({
                   autoCapitalize="none"
                   placeholder={t('onboarding.placeholders.email', 'Enter Email Address')}
                   placeholderTextColor={theme.textSub}
+                  editable={!loading}
                   style={[styles.input, { backgroundColor: inputBg, color: theme.textMain }, errors.email && styles.inputError]}
                 />
                 
-                {/* ✅ NEW: Wrapped Password Input with Toggle */}
                 <View>
                   <View style={[styles.passwordContainer, { backgroundColor: inputBg }, errors.password && styles.inputError]}>
                     <TextInput 
@@ -309,11 +337,13 @@ export function OnboardingFlow({
                       autoCapitalize="none"
                       placeholder={t('onboarding.placeholders.password', 'Enter Password')}
                       placeholderTextColor={theme.textSub}
+                      editable={!loading}
                       style={[styles.passwordInput, { color: theme.textMain }]}
                     />
                     <TouchableOpacity 
                       style={styles.eyeIcon} 
                       onPress={() => setShowPassword(!showPassword)}
+                      disabled={loading}
                     >
                       {showPassword ? (
                         <EyeOff size={22} color={theme.textSub} />
@@ -323,7 +353,6 @@ export function OnboardingFlow({
                     </TouchableOpacity>
                   </View>
 
-                  {/* ✅ NEW: Proactive Validation Checklist */}
                   <View style={styles.checklistRow}>
                     <CheckCircle 
                       size={16} 
@@ -343,27 +372,36 @@ export function OnboardingFlow({
         </ScrollView>
 
         <View style={[styles.footer, { paddingBottom: insets.bottom + 24 }]}>
+          {/* ✅ UPDATED: Primary Button with Loading UI */}
           <TouchableOpacity
             onPress={() => handleNext(false)}
-            disabled={isNextDisabled}
-            style={[styles.primaryBtn, { backgroundColor: theme.primary }, isNextDisabled && styles.disabledBtn]}
+            disabled={isNextDisabled || loading}
+            style={[
+              styles.primaryBtn, 
+              { backgroundColor: theme.primary }, 
+              (isNextDisabled || loading) && styles.disabledBtn
+            ]}
           >
-            <Text style={[styles.primaryBtnText, isNextDisabled && { color: 'rgba(255,255,255,0.6)' }]}>
-              {isFinalStep ? t('onboarding.buttons.finish', 'Finish Setup') : t('onboarding.buttons.continue', 'Continue')}
-            </Text>
+            {loading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <Text style={[styles.primaryBtnText, isNextDisabled && { color: 'rgba(255,255,255,0.6)' }]}>
+                {isFinalStep ? t('onboarding.buttons.finish', 'Finish Setup') : t('onboarding.buttons.continue', 'Continue')}
+              </Text>
+            )}
           </TouchableOpacity>
 
           {currentStep === 0 && !isGoogleUser && (
             <View style={styles.loginRow}>
               <Text style={{ color: theme.textSub }}>Already a member? </Text>
-              <TouchableOpacity onPress={onSignIn}>
+              <TouchableOpacity onPress={onSignIn} disabled={loading}>
                 <Text style={{ color: theme.primary, fontWeight: 'bold' }}>Log In</Text>
               </TouchableOpacity>
             </View>
           )}
 
           {(currentStep === 1 || currentStep === 2) && (
-            <TouchableOpacity onPress={() => handleNext(true)} style={styles.skipLink}>
+            <TouchableOpacity onPress={() => handleNext(true)} style={styles.skipLink} disabled={loading}>
               <Text style={{ color: theme.textSub, fontWeight: 'bold' }}>
                 {isGoogleUser && currentStep === 2 ? 'Skip & Finish' : 'Skip to Account Setup'}
               </Text>
@@ -453,11 +491,9 @@ const styles = StyleSheet.create({
   errorText: { color: '#b91c1c', fontSize: 13, fontWeight: 'bold' },
   formContainer: { width: '100%', gap: 16 },
   
-  // Standard Input Styles
   input: { height: 60, borderRadius: 16, paddingHorizontal: 20, fontSize: 16, fontWeight: '500' },
   inputError: { borderWidth: 2, borderColor: '#f87171' },
   
-  // ✅ NEW: Password Container Styles
   passwordContainer: { 
     height: 60, 
     borderRadius: 16, 
@@ -477,7 +513,6 @@ const styles = StyleSheet.create({
     alignItems: 'center' 
   },
   
-  // ✅ NEW: Checklist Styles
   checklistRow: {
     flexDirection: 'row',
     alignItems: 'center',

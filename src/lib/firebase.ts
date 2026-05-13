@@ -14,7 +14,7 @@ const firebaseConfig = {
   projectId: "samuel-e8a4b",
   storageBucket: "samuel-e8a4b.firebasestorage.app",
   messagingSenderId: "967986320464",
-  appId: "1:967986320464:web:ddbaf3e2a2ab5c969ead55",
+  appId: "1:967986320464:android:cdd95783a5a410179ead55",
 };
 
 // 2. Initialize App safely for Hot-Reloads

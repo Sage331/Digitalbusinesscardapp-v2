@@ -29,8 +29,17 @@ export const ContactService = {
             // Path: users (1) / {myUid} (2) / contacts (3) / {contactId} (4)
             const contactRef = doc(db, "users", myUid, "contacts", contactId);
             
+            // ✅ FIX: Sanitize the profile fields to prevent 'undefined' crashes
             const contactData = {
                 ...contact,
+                profile: {
+                    ...contact.profile,
+                    title: contact.profile.title ?? "",
+                    company: contact.profile.company ?? "",
+                    email: contact.profile.email ?? "",
+                    phone: contact.profile.phone ?? "",
+                    bio: contact.profile.bio ?? "",
+                },
                 // lastMet ensures we can order the list by most recent interaction
                 lastMet: serverTimestamp(),
                 updatedAt: serverTimestamp(),

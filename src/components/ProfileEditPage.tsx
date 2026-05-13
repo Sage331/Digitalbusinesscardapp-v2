@@ -12,12 +12,11 @@ import {
 import { FontAwesome5 } from '@expo/vector-icons';
 import { UserProfile, SUPPORTED_SOCIALS } from '../types';
 import * as ImagePicker from 'expo-image-picker';
-// ✅ Import Theme Context
 import { useTheme } from '../contexts/ThemeContext';
 
 interface ProfileEditPageProps {
   profile: UserProfile;
-  onSave: (profile: UserProfile) => void;
+  onSave: (profile: UserProfile) => Promise<void> | void;
   onBack: () => void;
   canDelete?: boolean; 
   onDelete?: () => void; 
@@ -33,33 +32,25 @@ linkPlatforms.push('other');
 export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }: ProfileEditPageProps) {
   const { t } = useTranslation();
   
-  // ✅ Hook into Central Theme
   const { theme, isDark } = useTheme();
-  
-  // ✅ Dynamic backgrounds for inputs to maintain contrast
   const inputBg = isDark ? theme.cardBg : '#f3f4f6';
 
   const [editedProfile, setEditedProfile] = useState<UserProfile>(profile);
-  const [isCompressing, setIsCompressing] = useState(false);
   const [photoPreview, setPhotoPreview] = useState<string | null>(profile.profileImage || null);
   
   const [pickerVisible, setPickerVisible] = useState(false);
   const [pickerType, setPickerType] = useState<'email' | 'link'>('email');
   const [activeItemIndex, setActiveItemIndex] = useState<number | null>(null);
 
-  // Helper to fix X and GitHub visibility in Dark Mode
+  // ✅ NEW: Loading state to prevent duplicate saves
+  const [loading, setLoading] = useState(false);
+
   const getThemeAwareColor = (platform: string, originalColor: string) => {
     const p = platform.toLowerCase();
     if (isDark && (p === 'x' || p === 'github')) {
-      return '#f3f4f6'; // Light gray for dark mode contrast
+      return '#f3f4f6'; 
     }
     return originalColor;
-  };
-
-  const renderSocialIcon = (platform: string) => {
-    const config = SUPPORTED_SOCIALS[platform.toLowerCase()] || SUPPORTED_SOCIALS['other'];
-    const displayColor = getThemeAwareColor(platform, config.color);
-    return <FontAwesome5 name={config.icon} size={18} color={displayColor} />;
   };
 
   const handleLinkChange = (index: number, url: string) => {
@@ -79,6 +70,8 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
   };
 
   const handlePhotoUpload = async () => {
+    if (loading) return;
+
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     
     if (status !== 'granted') {
@@ -102,20 +95,39 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
   };
 
   const handleCancel = useCallback(() => {
+    if (loading) return; // Block cancel while saving
     onBack();
-  }, [onBack]);
+  }, [onBack, loading]);
 
   const handleSave = async () => {
-    onSave(editedProfile);
+    if (loading) return; // Prevent double-clicking
+
+    setLoading(true);
+
+    // ✅ 15s Safety Net: Force-unlock if Firebase hangs
+    const safetyTimer = setTimeout(() => {
+      setLoading(false);
+    }, 15000);
+
+    try {
+      await onSave(editedProfile);
+    } catch (error) {
+      console.error("Save failed:", error);
+    } finally {
+      clearTimeout(safetyTimer);
+      setLoading(false); // ✅ Guaranteed to run
+    }
   };
   
   const openEmailPicker = (index: number) => {
+    if (loading) return;
     setPickerType('email');
     setActiveItemIndex(index);
     setPickerVisible(true);
   };
 
   const openPlatformPicker = (index: number) => {
+    if (loading) return;
     setPickerType('link');
     setActiveItemIndex(index);
     setPickerVisible(true);
@@ -135,12 +147,13 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
 
   useEffect(() => {
     const backAction = () => {
+      if (loading) return true; // Block hardware back during submit
       handleCancel();
       return true; 
     };
     const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
     return () => backHandler.remove(); 
-  }, [handleCancel]);
+  }, [handleCancel, loading]);
 
   const renderCustomPicker = () => {
     const isEmail = pickerType === 'email';
@@ -193,9 +206,12 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
     <SafeAreaView style={[styles.container, { backgroundColor: theme.bg }]} edges={['bottom']}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         
-        {/* 🏛️ NEW STYLIZED HEADER */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={handleCancel} style={[styles.circleBackBtn, { backgroundColor: isDark ? theme.cardBg : '#9ca3af' }]}>
+          <TouchableOpacity 
+            onPress={handleCancel} 
+            disabled={loading}
+            style={[styles.circleBackBtn, { backgroundColor: isDark ? theme.cardBg : '#9ca3af', opacity: loading ? 0.5 : 1 }]}
+          >
             <ChevronLeft size={24} color={isDark ? theme.textMain : "white"} />
           </TouchableOpacity>
           
@@ -206,7 +222,6 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
           </TouchableOpacity>
         </View>
 
-        {/* 🏛️ SCROLLABLE FORM AREA */}
         <ScrollView 
           contentContainerStyle={styles.scrollContent} 
           showsVerticalScrollIndicator={false}
@@ -214,7 +229,6 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
         >
           <View style={styles.formWidth}>
             
-            {/* Avatar Area */}
             <View style={styles.avatarContainer}>
               <View style={styles.avatarWrapper}>
                 {photoPreview ? (
@@ -224,17 +238,21 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
                     <Text style={styles.avatarPlaceholderText}>{initials}</Text>
                   </View>
                 )}
-                <TouchableOpacity style={[styles.galleryBadge, { backgroundColor: theme.cardBg, borderColor: theme.border }]} onPress={handlePhotoUpload}>
+                <TouchableOpacity 
+                  style={[styles.galleryBadge, { backgroundColor: theme.cardBg, borderColor: theme.border }]} 
+                  onPress={handlePhotoUpload}
+                  disabled={loading}
+                >
                   <ImageIcon size={18} color={theme.textSub} />
                 </TouchableOpacity>
               </View>
             </View>
 
-            {/* Core Flat Inputs (Label-less) */}
             <View style={styles.inputStack}>
               <TextInput 
                 value={editedProfile.firstName || ""} 
                 onChangeText={(text) => setEditedProfile({ ...editedProfile, firstName: text })}
+                editable={!loading}
                 style={[styles.flatInput, { backgroundColor: inputBg, color: theme.textMain }]}
                 placeholder="Enter your first name"
                 placeholderTextColor={theme.textSub}
@@ -243,6 +261,7 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
               <TextInput 
                 value={editedProfile.lastName || ""} 
                 onChangeText={(text) => setEditedProfile({ ...editedProfile, lastName: text })}
+                editable={!loading}
                 style={[styles.flatInput, { backgroundColor: inputBg, color: theme.textMain }]}
                 placeholder="Enter your last name"
                 placeholderTextColor={theme.textSub}
@@ -251,6 +270,7 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
               <TextInput 
                 value={editedProfile.title || ""} 
                 onChangeText={(text) => setEditedProfile({ ...editedProfile, title: text })}
+                editable={!loading}
                 style={[styles.flatInput, { backgroundColor: inputBg, color: theme.textMain }]}
                 placeholder="Enter your job title"
                 placeholderTextColor={theme.textSub}
@@ -259,6 +279,7 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
               <TextInput 
                 value={editedProfile.company || ""} 
                 onChangeText={(text) => setEditedProfile({ ...editedProfile, company: text })}
+                editable={!loading}
                 style={[styles.flatInput, { backgroundColor: inputBg, color: theme.textMain }]}
                 placeholder="Enter your company name"
                 placeholderTextColor={theme.textSub}
@@ -272,6 +293,7 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
                   newEmails[0].address = text;
                   setEditedProfile({ ...editedProfile, emails: newEmails });
                 }}
+                editable={!loading}
                 keyboardType="email-address"
                 style={[styles.flatInput, { backgroundColor: inputBg, color: theme.textMain }]}
                 placeholder="Enter your company email"
@@ -282,6 +304,7 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
               <TextInput 
                 value={editedProfile.phone || ""} 
                 onChangeText={(text) => setEditedProfile({ ...editedProfile, phone: text })}
+                editable={!loading}
                 keyboardType="phone-pad"
                 style={[styles.flatInput, { backgroundColor: inputBg, color: theme.textMain }]}
                 placeholder="Enter your company phone number"
@@ -293,13 +316,13 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
                 maxLength={150}
                 value={editedProfile.bio || ""} 
                 onChangeText={(text) => setEditedProfile({ ...editedProfile, bio: text })}
+                editable={!loading}
                 placeholder="Enter your company bio"
                 placeholderTextColor={theme.textSub}
                 style={[styles.flatInput, styles.textArea, { backgroundColor: inputBg, color: theme.textMain }]}
               />
             </View>
 
-            {/* Flat Social Links */}
             <View style={styles.sectionHeader}>
               <Text style={[styles.sectionTitle, { color: theme.textSub }]}>Social Handles</Text>
             </View>
@@ -314,6 +337,7 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
                     <TouchableOpacity 
                       style={[styles.socialIconBtn, { borderRightColor: theme.border }]}
                       onPress={() => openPlatformPicker(index)}
+                      disabled={loading}
                     >
                       <FontAwesome5 name={config.icon} size={18} color={displayColor} />
                       <ChevronDown size={12} color={theme.textSub} style={{ marginLeft: 2 }} />
@@ -322,6 +346,7 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
                     <TextInput 
                       value={link.url || ""} 
                       onChangeText={(text) => handleLinkChange(index, text)}
+                      editable={!loading}
                       autoCapitalize="none"
                       style={[styles.socialInput, { color: theme.textMain }]}
                       placeholder="Enter URL or Username"
@@ -334,6 +359,7 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
                         const newLinks = (editedProfile.links || []).filter((_, i) => i !== index);
                         setEditedProfile({ ...editedProfile, links: newLinks });
                       }}
+                      disabled={loading}
                     >
                       <X size={18} color={theme.textSub} />
                     </TouchableOpacity>
@@ -347,16 +373,17 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
                   ...editedProfile, 
                   links: [...(editedProfile.links || []), { platform: 'other', url: '' }]
                 })}
+                disabled={loading}
               >
                 <Plus size={16} color={theme.primary} />
                 <Text style={[styles.addSocialText, { color: theme.primary }]}>Add Social Handle</Text>
               </TouchableOpacity>
             </View>
 
-            {/* Delete Identity Feature */}
             {canDelete && onDelete && (
               <TouchableOpacity 
-                style={[styles.deleteActionBtn, { backgroundColor: isDark ? 'rgba(239, 68, 68, 0.1)' : '#fef2f2', borderColor: isDark ? '#7f1d1d' : '#fecaca' }]}
+                style={[styles.deleteActionBtn, { backgroundColor: isDark ? 'rgba(239, 68, 68, 0.1)' : '#fef2f2', borderColor: isDark ? '#7f1d1d' : '#fecaca', opacity: loading ? 0.5 : 1 }]}
+                disabled={loading}
                 onPress={() => {
                   Alert.alert(
                     'Delete Identity',
@@ -376,20 +403,18 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
           </View>
         </ScrollView>
 
-        {/* 🏛️ FIXED FOOTER - Outside ScrollView */}
         <View style={[styles.fixedFooter, { backgroundColor: theme.bg, borderTopColor: theme.border }]}>
           <TouchableOpacity 
             onPress={handleSave} 
-            disabled={isCompressing}
-            style={[styles.fullSaveBtn, { backgroundColor: theme.primary }, isCompressing && styles.disabledBtn]}
+            disabled={loading}
+            style={[styles.fullSaveBtn, { backgroundColor: theme.primary }, loading && styles.disabledBtn]}
           >
-            {isCompressing ? <ActivityIndicator color="white" /> : <Text style={styles.fullSaveBtnText}>Update Profile</Text>}
+            {loading ? <ActivityIndicator color="white" /> : <Text style={styles.fullSaveBtnText}>Update Profile</Text>}
           </TouchableOpacity>
         </View>
 
       </KeyboardAvoidingView>
 
-      {/* Custom Picker Overlay */}
       {renderCustomPicker()}
     </SafeAreaView>
   );
@@ -397,8 +422,6 @@ export function ProfileEditPage({ profile, onSave, onBack, canDelete, onDelete }
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  
-  // New Header
   header: { 
     flexDirection: 'row', 
     justifyContent: 'space-between', 
@@ -410,24 +433,17 @@ const styles = StyleSheet.create({
   circleBackBtn: { width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center' },
   headerTitle: { fontSize: 18, fontWeight: 'bold' },
   circleEditBtn: { width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center' },
-  
   scrollContent: { paddingHorizontal: 20, paddingBottom: 40, paddingTop: 10 },
   formWidth: { maxWidth: 500, alignSelf: 'center', width: '100%' },
-  
-  // Avatar
   avatarContainer: { alignItems: 'center', marginBottom: 24 },
   avatarWrapper: { position: 'relative' },
   avatarImage: { width: 110, height: 110, borderRadius: 55, borderWidth: 4 },
   avatarPlaceholder: { width: 110, height: 110, borderRadius: 55, backgroundColor: '#2563eb', justifyContent: 'center', alignItems: 'center', borderWidth: 4 },
   avatarPlaceholderText: { color: 'white', fontSize: 36, fontWeight: 'bold' },
   galleryBadge: { position: 'absolute', bottom: 0, right: 0, width: 36, height: 36, borderRadius: 18, justifyContent: 'center', alignItems: 'center', borderWidth: 1, elevation: 2, shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 4 },
-  
-  // Flat Inputs
   inputStack: { gap: 14, marginBottom: 24 },
   flatInput: { borderRadius: 12, paddingVertical: 16, paddingHorizontal: 16, fontSize: 15 },
   textArea: { minHeight: 100, textAlignVertical: 'top' },
-  
-  // Social Handles
   sectionHeader: { marginBottom: 12 },
   sectionTitle: { fontSize: 14, fontWeight: 'bold', marginLeft: 4 },
   socialStack: { gap: 12, marginBottom: 24 },
@@ -437,18 +453,12 @@ const styles = StyleSheet.create({
   socialDeleteBtn: { padding: 12 },
   addSocialBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 16, borderRadius: 12, gap: 8, borderWidth: 1, borderStyle: 'dashed' },
   addSocialText: { fontWeight: 'bold', fontSize: 14 },
-  
-  // Delete Action
   deleteActionBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingVertical: 16, borderRadius: 12, borderWidth: 1, marginBottom: 20 },
   deleteActionText: { color: '#ef4444', fontWeight: 'bold', fontSize: 15 },
-
-  // 🏛️ Fixed Footer
   fixedFooter: { paddingHorizontal: 20, paddingTop: 12, paddingBottom: Platform.OS === 'ios' ? 30 : 20, borderTopWidth: 1 },
   fullSaveBtn: { width: '100%', paddingVertical: 16, borderRadius: 12, alignItems: 'center' },
   fullSaveBtnText: { color: 'white', fontWeight: 'bold', fontSize: 16 },
   disabledBtn: { opacity: 0.7 },
-  
-  // Modal Overlays
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.6)', justifyContent: 'center', padding: 24 },
   customPickerCard: { borderRadius: 24, padding: 24 },
   pickerTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
